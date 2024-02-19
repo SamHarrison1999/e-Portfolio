@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 9: Packaging and Testing</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="unit-9">
+        <h1>Unit 9: Packaging and Testing</h1>
+        <h2>Contents</h2>
+        <ul style="list-style-type:circle;">
+          <li><a href="#unit-9-objectives">Unit 9 Objectives</a></li>
+          <li><a href="#unit-9-reflection">Unit 9 Reflection</a></li>
+          <li><a href="#collaborative-discussion-2">Collaborative Discussion</a></li>
+          <li><a href="#e-portfolio-activities">E-Portfolio Activities</a></li>
+        </ul>
+        <div id="unit-9-objectives">
+            <h2>What we did in unit 9</h2>
+            <p>In this unit, we looked at how to package and test a Python program.</p>
+        </div>
+        <div id="unit-9-reflection">
+            <h2>Reflection on unit 9</h2>
+            <p>This unit significantly improves my testing knowledge as previously I had done little in regard to unit testing in Python. It also provided me with information on how to properly package and comment a Python program to follow PEP standards.</p>
+        </div>
+        <div id="collaborative-discussion-2">
+            <div id="peer-review-1">
+                <h2>Peer Review 1</h2>
+                <p>I liked how Maria used colours to group the different aspects of her diagram as it made it easier to understand and made it visually more appealing. Presenting the the strengths and weakness in a table was a good idea as it made it clear to distinguish what she thought were the strengths and weaknesses of metamodels.</p>
+            </div>
+            <div id="peer-review-2">
+                <h2>Peer Review 2</h2>
+                <p>Mario clearly showed the benefits are drawbacks to using metamodels through the use of bullet points. He also used sources well throughout and it was alot more concise than his previous collaborative discussion. Like Maria he also used colours on his diagram to make it clear what each part of the system represented.</p>
+            </div>
+        </div>
+        <div id="e-portfolio-activities">
+            <h2>E-portfolio Activities</h2>
+            <p>You can complete one or more of the following activities for inclusion in your e-portfolio. You can also share your work with your tutor for formative feedback.</p>
+            <h2>Activity 3</h2>
+            <p>What is the cyclomatic complexity of the following piece of code?</p>
+            <pre><code class="python">public static string IntroducePerson(string name, int age) {
+    var response = $"Hi! My name is {name} and I'm {age} years old.";
+
+    if (age >= 18)
+        response += " I'm an adult.";
+
+    if (name.Length > 7)
+        response += " I have a long name.";
+
+    return response;
+}</code></pre>
+            <p>The cyclomatic complexity of this piece of code is 3 as there are three different responses (if the person is an adult, if the persons has a long name or the default response.</p>
+            <h2>Activity 4</h2>
+            <p>Extend the following program to test accuracy of operations using the assert statement.</p>
+            <pre><code class="python"># Python String Operations
+str1 = 'Hello'
+str2 ='World!'
+
+# using +
+print('str1 + str2 = ', str1 + str2)
+
+# using *
+print('str1 * 3 =', str1 * 3)
+assert str1 + str2 == "HelloWorld!"
+assert str1*3 == "HelloHelloHello"</code></pre>
+        </div>
+    </div>
+    <div class = "navigation">
+        <div style='float: left;'><a href="unit-8.html" class="previous round">&#8249;</a></div>
+        <div style='float: right;'><a href="unit-10.html" class="next round">&#8250;</a></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 2: Object Oriented Analysis - Initial Steps towards Programming in Python</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="unit-2">
+    <h1>Unit 2: Object Oriented Analysis - Initial Steps towards Programming in Python</h1>
+    <h2>Contents</h2>
+    <ul style="list-style-type:circle;">
+        <li><a href="#unit-2-objectives">Unit 2 Objectives</a></li>
+        <li><a href="#unit-2-reflection">Unit 2 Reflection</a></li>
+        <li><a href="#unit-2-codio-activities">Codio Activities</a>
+            <ul style="list-style-type:circle;">
+                <li><a href="#16.1-time">16.1 Time</a>
+                <li><a href="#16.2-pure-functions">16.2 Pure functions</a>
+                <li><a href="#16.3-modifiers">16.3 Modifiers</a>
+                <li><a href="#16.4-prototyping-versus-planning">16.4 Prototyping versus planning</a>
+                <li><a href="#16.5-debugging">16.5 Debugging</a>
+                <li><a href="#exercise-16.1">Exercise 16.1</a>
+                <li><a href="#exercise-16.2">Exercise 16.2</a>
+                <li><a href="#17.1-object-oriented-features">17.1 Object-oriented features</a>
+                <li><a href="#17.2-printing-objects">17.2 Printing objects</a>
+                <li><a href="#17.3-another-example">17.3 Another example</a>
+                <li><a href="#17.4-a-more-complicated-example">17.4 A more complicated example</a>
+                <li><a href="#17.5-the-init-method">17.5 The init method</a>
+                <li><a href="#17.6-the-__str__-method">17.6 The __str__ method</a>
+                <li><a href="#17.7-operator-overloading">17.7 Operator overloading</a>
+                <li><a href="#17.8-type-based-dispatch">17.8 Type-based dispatch</a>
+                <li><a href="#17.9-polymorphism">17.9 Polymorphism</a>
+                <li><a href="#17.10-debugging">17.10 Debugging</a>
+                <li><a href="#17.11-interface-and-implementation">17.11 Interface and implementation</a>
+                <li><a href="#exercise-17.1">Exercise 17.1</a>
+                <li><a href="#exercise-17.2">Exercise 17.2</a>
+                <li><a href="#tutorial-lab-1-instance-methods">Lab 1: Instance Methods</a>
+                <li><a href="#tutorial-lab-2-demonstrating-instance-methods">Lab 2: Demonstrating Instance Methods</a>
+                <li><a href="#tutorial-lab-3-static-members">Lab 3: Static Members</a>
+                <li><a href="#tutorial-lab-4-static-methods">Lab 4: Static Methods</a>
+                <li><a href="#unit-2-challenge">Lab Challenge</a>
+                <li><a href="#unit-2-stretch-challenge">Lab Stretch Challenge</a>
+                <li><a href="#unit-2-self-check-questions">Self-Check Questions</a>
+            </ul>
+        </li>
+        <li><a href="#unit-2-extension-activity">Extension Activity</a></li>
+        <li><a href="#collaborative-discussion-peer-responses">Collaborative Discussion</a></li>
+    </ul>
+    <div id="unit-2-objectives">
+        <h2>What we did in unit 2</h2>
+        <p>In this module we looked at UML diagrams specifically use case diagrams and state machine diagrams</p>
+    </div>
+    <div id="unit-2-reflection">
+        <h2>Reflection on unit 2</h2>
+        <p>While I had previously learnt about UML diagrams my knowledge of them was by no means extensive. Learning more about them was a really valuable exercise for me as for my small and large intern projects for my job I had to create a high level design document which required me to make many of the diagrams I learned about over the course of this unit. Knowing how to make high quality design diagrams definitely had a significant effect on the outcome of the small intern project and saved me a significant of time when working on the large intern project. </p>
+    </div>
+    <div id="unit-2-codio-activities">
+        <h2>Unit 2 Codio Activities</h2>
+        <h3>Class Functions and Class Methods</h3>
+        <div id="16.1-time">
+            <h4>16.1 Time</h4>
+            <pre><code class="python">class Time:
+    """
+    Represents the time of day.
+    attributes: hour, minute, second
+    """
+
+&gt;&gt;&gt; time = Time()
+&gt;&gt;&gt; time.hour = 11
+&gt;&gt;&gt; time.minute = 59
+&gt;&gt;&gt; time.second = 30</code></pre>
+            <h4>Exercise</h4>
+            <ul style="list-style-type:circle;">
+                <li>Write a print_time function that takes a Time object as an argument and prints it in the form HH:MM:SS.</li>
+                <li>Write a boolean function called is_after that takes two Time objects, t1 and t2 as arguments, and returns true if t1 follows t2 chronologically otherwise it returns false.</li>
+            </ul>
+            <pre><code class="python">def print_time(self):
+    """Prints the time object in the form HH:MM:SS"""
+    print('%.2d:%.2d:%.2d' % (self.hour, self.minute, self.second))
+
+def is_after(self, other):
+    """Checks if the first time object is after the second time object"""
+    # convert time objects to integer
+    integer_t1 = 3600 * self.hour + 60 * self.minute + self.second
+    integer_t2 = 3600 * other.hour + 60 * other.minute + other.second
+    return integer_t1 > integer_t2</code></pre>
+        </div>
+        <div id="16.2-pure-functions">
+            <h4>16.2 Pure functions</h4>
+            <p>A pure function is a function that does not modify any of the objects passed to it as arguments, and it has no effect other than returning a value.</p>
+            <pre><code class="python">def add_time(t1, t2) -> Time:
+    """Add two time objects together"""
+    sum = Time()
+    sum.hour = t1.hour + t2.hour
+    sum.minute = t1.minute + t2.minute
+    sum.second = t1.second + t2.second
+    if sum.second >= 60:
+        sum.second -= 60
+        sum.minute += 1
+    if sum.minute >= 60:
+        sum.minute -= 60
+        sum.hour += 1
+    return sum
+
+&gt;&gt;&gt; start = Time()
+&gt;&gt;&gt; start.hour = 9
+&gt;&gt;&gt; start.minute = 45
+&gt;&gt;&gt; start.second =  0
+
+&gt;&gt;&gt; duration = Time()
+&gt;&gt;&gt; duration.hour = 1
+&gt;&gt;&gt; duration.minute = 35
+&gt;&gt;&gt; duration.second = 0
+
+&gt;&gt;&gt; done = add_time(start, duration)
+&gt;&gt;&gt; print_time(done)
+11:20:00</code></pre>
+        </div>
+        <div id="16.3-modifiers">
+            <h4>16.3 Modifiers</h4>
+            <p>Functions that modify the object passed into it are called modifiers.</p>
+            <h5>Exercise</h5>
+            <p>Write a pure version of the increment function</p>
+            <pre><code class="python">def increment(self, seconds):
+    new_time = copy.copy(self)
+    total_time = new_time.time_to_int() + seconds
+    return int_to_time(total_time)
+
+def time_to_int(self):
+    minutes = self.hour * 60 + self.minute
+    seconds = minutes * 60 + self.second
+    return seconds</code></pre>
+        </div>
+        <div id="16.4-prototyping-versus-planning">
+            <h4>16.4 Prototyping versus planning</h4>
+            <p>Prototype and patching is a development plan that involves writing a rough draft of a program, testing, and correcting errors as they are found. A drawback of doing this is you may end up with code that is overcomplicated and unreliable.</p>
+            <pre><code class="python">def time_to_int(time):
+    """Converts times to integers"""
+    minutes = time.hour * 60 + time.minute
+    seconds = minutes * 60 + time.second
+    return seconds
+
+def int_to_time(seconds):
+    """Converts an integer to a time"""
+    time = Time()
+    minutes, time.second = divmod(seconds, 60)
+    time.hour, time.minute = divmod(minutes, 60)
+    return time
+
+# Improving the add time function to use time to int and int to time functions
+def add_time(t1, t2):
+    """Add two time objects together"""
+    seconds = time_to_int(t1) + time_to_int(t2)
+    return int_to_time(seconds)</code></pre>
+            <h4>Exercise</h4>
+            <p>Modify the increment function to use time_to_int and int_to_time.</p>
+            <pre><code class="python">def increment(self, seconds):
+    """Add seconds to the time"""
+    total_time = self.time_to_int() + seconds
+    return int_to_time(total_time)</code></pre>
+        </div>
+        <div id="16.5-debugging">
+            <h4>16.5 Debugging</h4>
+            <h5>Invariants</h5>
+            <p>Invariants are a condition that should always be true during the execution of a program.. Testing invariants can help find bugs in your code.</p>
+            <pre><code class="python">def valid_time(time):
+    """Checks the time is valid"""
+    if time.hour < 0 or time.minute < 0 or time.second < 0:
+        return False
+    if time.minute >= 60 or time.second >= 60:
+        return False
+    return True
+
+def add_time(t1, t2):
+    if not valid_time(t1) or not valid_time(t2):
+        raise ValueError('invalid Time object in add_time')
+    seconds = time_to_int(t1) + time_to_int(t2)
+    return int_to_time(seconds)
+
+def add_time(t1, t2):
+    # Assert statements are used to check for errors.
+    assert valid_time(t1) and valid_time(t2)
+    seconds = time_to_int(t1) + time_to_int(t2)
+    return int_to_time(seconds)</code></pre>
+        </div>
+        <div id="exercise-16.1">
+            <h4>Exercise 16.1</h4>
+            <ul style="list-style-type:circle;">
+                <li>Write a function called mul_time that takes a time object and a number and returns the product of the original time and the number.</li>
+                <li>Write a function that takes a time object that represents the finishing time in a race, and a number that represents the distance, and returns a Time object that represents the average pace per mile.</li>
+            </ul>
+            <pre><code class="python"># inside class Time:
+def mul_time(self, factor):
+    """Return the product of time and factor"""
+    seconds = int(self.time_to_int() * factor)
+    return int_to_time(seconds)
+
+def race_pace(self, number):
+    """Return the average speed per mile in a race"""
+    return self.mul_time(1 / float(number))</code></pre>
+            <h5>Question</h5>
+            <p>Use the code below and the code you have written to calculate the pace of a marathon runner (26.2 miles)</p>
+            <pre><code class="python">race_time = Time()
+race_time.hour = 3
+race_time.minute = 34
+race_time.second = 5</code></pre>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    7.59 minutes/mile
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" checked disabled readonly/>
+                    8.17 minutes/mile
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    9.23 minutes/mile
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    10.05 minutes/mile
+                </label>
+            </div>
+        </div>
+        <div id="exercise-16.2">
+            <h4>Exercise 16.2</h4>
+            <ul style="list-style-type:circle;">
+                <li>Use the datetime module to write a program that gets the current date and prints the day of the week.</li>
+                <li>Write a program that takes a birthday as input and prints the user’s age and the number of days, hours, minutes and seconds until their next birthday.</li>
+                <li>For two people born on different days, there is a day when one is twice as old as the other. That’s their Double Day. Write a program that takes two birthdays and computes their Double Day.</li>
+                <li>Write a function that computes the day when one person is n times older than the other.</li>
+            </ul>
+            <pre><code class="python">def today_day():
+    """Get the current date and day of the week"""
+    return datetime.today().strftime("%A")
+
+def birthday_countdown(birth_date):
+    """Get your age and the time until your next birthday"""
+    today = date.today()
+    birthday = birth_date.replace(year=today.year)
+    birthday = birthday.replace(year=birthday.year + 1) if birthday <= today else birthday
+    age = today.year - birth_date.year - 1 if birth_date.year == birthday.year else today.year - birth_date.year - 1
+    countdown = datetime(birthday.year, birthday.month, birthday.day, 0, 0, 0) - datetime.now()
+    return f"You are currently {age} years old\nIt is {countdown.days} days, {countdown.seconds // 3600} hours, {countdown.seconds // 60 % 60} minutes, and {countdown.seconds % 60} seconds until your next birthday"
+
+def double_day(date_1, date_2):
+    """Returns the day when one person is twice as old as another person"""
+    d1 = min(date_1, date_2)
+    d2 = max(date_1, date_2)
+    double_day = (d2 - d1).days  # double_day is this many days from d2
+    return d2 + timedelta(days=double_day)
+
+def the_day_when_one_person_is_n_times_older_than_the_other(date_1, date_2, product):
+    """The day when one person is n times older than another person"""
+    d1 = min(date_1, date_2)
+    d2 = max(date_1, date_2)
+    difference = (d2 - d1).days
+    day = difference / (product - 1)
+    return d2 + timedelta(days=day)</code></pre>
+        </div>
+        <div id="17.1-object-oriented-features">
+            <h4>17.1 Object-oriented features</h4>
+            <p>Object-oriented programming characteristics</p>
+            <ul style="list-style-type:circle;">
+                <li>Programs include class and method definitions</li>
+                <li>Most of the computation is expressed in terms of operations on objects.</li>
+                <li>Objects often represent things in the real world, and methods often correspond to the ways things in the real world interact.</li>
+            </ul>
+            <h5>What is a method in object-oriented programming?</h5>
+            <p>A method is a function associated with a particular class</p>
+            <h5>Methods vs. Functions</h5>
+            <ul style="list-style-type:circle;">
+                <li>Methods are defined inside a class definition to make the relationship between the class and the method explicit.</li>
+                <li>The syntax for invoking a method is different from the syntax for calling a function.</li>
+            </ul>
+        </div>
+        <div id="17.2-printing-objects">
+            <h4>17.2 Printing objects</h4>
+            <pre><code class="python">class Time:
+    """Represents the time of day."""
+
+    def print_time(self):
+        """Prints the time in HH:MM:SS"""
+        print('%.2d:%.2d:%.2d' % (self.hour, self.minute, self.second))
+
+&gt;&gt;&gt; Time.print_time(start) # Calling the print time function using the function syntax
+09:45:00
+&gt;&gt;&gt; start.print_time() # Calling the print time function using the dot notation
+09:45:00</code></pre>
+            <h5>Exercise</h5>
+            <p>As an exercise, rewrite time_to_int as a method</p>
+            <pre><code class="python"># inside class Time:
+def time_to_int(self):
+    minutes = self.hour * 60 + self.minute
+    seconds = minutes * 60 + self.second
+    return seconds</code></pre>
+        </div>
+        <div id="17.3-another-example">
+            <h4>17.3 Another example</h4>
+            <pre><code class="python"># inside class Time:
+# Increment function written as a method
+def increment(self, seconds):
+    seconds += self.time_to_int()
+    return int_to_time(seconds)
+
+&gt;&gt;&gt; start.print_time()
+09:45:00
+&gt;&gt;&gt; end = start.increment(1337) # Calling the increment function
+&gt;&gt;&gt; end.print_time()
+10:07:17</code></pre>
+            <h5>Positional argument</h5>
+            <p>A positional argument is an argument that does not have a parameter name.</p>
+            <pre><code class="python">sketch(parrot, cage, dead=True) # parrot and cage are positional arguments, and dead is a keyword argument.</code></pre>
+        </div>
+        <div id="17.4-a-more-complicated-example">
+            <h4>17.4 A more complicated example</h4>
+            <pre><code class="python"># inside class Time:
+# Is after function written as a method
+def is_after(self, other):
+    return self.time_to_int() > other.time_to_int()
+
+&gt;&gt;&gt; end.is_after(start)
+True
+</code></pre>
+        </div>
+        <div id="17.5-the-init-method">
+            <h4>17.5 The init method</h4>
+            <p>The init method gets invoked when an object is instantiated.</p>
+            <pre><code class="python"># inside time class
+def __init__(self, hour=0, minute=0, second=0):
+        self.hour = hour
+        self.minute = minute
+        self.second = second</code></pre>
+            <h5>Exercise</h5>
+            <p>As an exercise, write an init method for the Point class that takes x and y as optional parameters and assigns them to the corresponding attributes.</p>
+            <pre><code class="python"># inside point class:
+def __init__(self, x=0, y=0):
+    self.x = x
+    self.y = y</code></pre>
+        </div>
+        <div id="17.6-the-__str__-method">
+            <h4>17.6 The __str__ method</h4>
+            <p>The __str__ method returns the object as a string it is called when you call the print function<</p>
+            <pre><code class="python"># inside time class
+def __str__(self):
+    return '%.2d:%.2d:%.2d' % (self.hour, self.minute, self.second)</code></pre>
+            <h5>Exercise</h5>
+            <ul style="list-style-type:circle;">
+                <li>Write a str method for the Point class.</li>
+                <li>Create a Point object and print it.</li>
+            </ul>
+            <pre><code class="python"># inside point class
+def __str__(self):
+    return '(%g, %g)' % (self.x, self.y)
+
+&gt;&gt;&gt; point = Point(3.0, 4.0)
+&gt;&gt;&gt; print(point)
+(3.0, 4.0)</code></pre>
+        </div>
+        <div id="17.7-operator-overloading">
+            <h4>17.7 Operator overloading</h4>
+            <p>Changing the behavior of an operator so that it works with programmer-defined types is called operator overloading.</p>
+            <pre><code class="python"># inside time class
+def __add__(self, other):
+    seconds = self.time_to_int() + other.time_to_int()
+    return int_to_time(seconds)
+
+&gt;&gt;&gt; start = Time(9, 45)
+&gt;&gt;&gt; duration = Time(1, 35)
+&gt;&gt;&gt; print(start + duration)
+11:20:00</code></pre>
+            <h5>Exercise</h5>
+            <p>Write an add method for the Point class.</p>
+            <pre><code class="python"># inside point class
+def __add__(self, other):
+    return Point(self.x + other.x, self.y + other.y)</code></pre>
+        </div>
+        <div id="17.8-type-based-dispatch">
+            <h4>17.8 Type-based dispatch</h4>
+            <p>Type-based dispatch is where you invoke different methods based on the type of the arguments.</p>
+            <pre><code class="python"># inside time class
+
+# Check the type of other, then depending on the type call the appropriate method to add to the time object.
+def __add__(self, other):
+    # The isinstance function returns a boolean value representing if the value is a specific data type.
+    if isinstance(other, Time):
+        return self.add_time(other)
+    else:
+        return self.increment(other)
+
+# Without the right side add method it would fail with a type error if the integer is the first argument
+def __radd__(self, other):
+    return self.__add__(other)
+
+def add_time(self, other):
+    seconds = self.time_to_int() + other.time_to_int()
+    return int_to_time(seconds)
+
+def increment(self, seconds):
+    seconds += self.time_to_int()
+    return int_to_time(seconds)</code></pre>
+            <h5>Exercise</h5>
+            <ul style="list-style-type:circle;">
+                <li>Write an add method for points that works with either a point object or a tuple.</li>
+                <li>If the second operand is a Point, the method should return a new Point whose x and y coordinates are the sum of the x and y coordinates</li>
+                <li>If the second operand is a tuple, the method should add the first element of the tuple to the x coordinate and the second element to the y coordinate, and return a new point.</li>
+            </ul>
+            <pre><code class="python"># inside point class
+def __add__(self, other):
+    if isinstance(other, Point):
+        return Point(self.x + other.x, self.y + other.y)
+    else:
+        return Point(self.x + other[0], self.y + other[1])</code></pre>
+        </div>
+        <div id="17.9-polymorphism">
+            <h4>17.9 Polymorphism</h4>
+            <p>Polymorphic functions are functions that work with several types. Polymorphism allows you to reuse code.</p>
+        </div>
+        <div id="17.10-debugging">
+            <h4>17.10 Debugging</h4>
+<pre><code class="python">def print_attributes(obj):
+    """Display each attributes name and value"""
+    for attr in vars(obj):
+        print(attr, getattr(obj, attr))
+
+&gt;&gt;&gt; p = Point(3, 4)
+&gt;&gt;&gt; vars(p) # Accessing attributes with the vars function
+{'y': 4, 'x': 3}
+&gt;&gt;&gt; print_attributes(p)
+x 3
+y 4
+</code></pre>
+        </div>
+        <div id="17.11-interface-and-implementation">
+            <h4>17.11 Interface and implementation</h4>
+            <p>Keeping interfaces separate from implementations allows you to modify code without breaking it.</p>
+        </div>
+        <div id="exercise-17.1">
+            <h4>Exercise 17.1</h4>
+            <ul style="list-style-type:circle;">
+                <li>Change the attributes of time to be a single integer representing seconds since midnight.</li>
+                <li>Modify the methods and functions to work with the new implementation. </li>
+            </ul>
+            <pre><code class="python">import copy
+
+class Time:
+
+    def __init__(self, hour=0, minute=0, second=0):
+        minutes = hour * 60 + minute
+        self.second = minutes * 60 + second
+
+    def __str__(self):
+        minutes, second = divmod(self.second, 60)
+        hour, minute = divmod(minutes, 60)
+        return '%.2d:%.2d:%.2d' % (hour, minute, second)
+
+    def __add__(self, other):
+        if isinstance(other, Time):
+            return self.add_time(other)
+        else:
+            return self.increment(other)
+
+    def __radd__(self, other):
+        return self.__add__(other)
+
+    def print_time(self):
+        print('%.2d:%.2d:%.2d' % (self.hour, self.minute, self.second))
+
+    def time_to_int(self):
+        minutes = self.hour * 60 + self.minute
+        seconds = minutes * 60 + self.second
+        return seconds
+
+    def add_time(self, other):
+        assert valid_time(self) and valid_time(other)
+        seconds = self.time_to_int() + other.time_to_int()
+        return int_to_time(seconds)
+
+    def is_after(self, other):
+        # convert time objects to integer
+        integer_t1 = 3600 * self.hour + 60 * self.minute + self.second
+        integer_t2 = 3600 * other.hour + 60 * other.minute + other.second
+
+        return integer_t1 > integer_t2
+
+    def increment(self, seconds):
+        new_time = copy.copy(self)
+        total_time = new_time.time_to_int() + seconds
+        return int_to_time(total_time)
+
+    def mul_time(self, factor):
+        seconds = int(self.time_to_int() * factor)
+        return int_to_time(seconds)
+
+    def race_pace(self, number):
+        return self.mul_time(1 / float(number))
+
+
+def valid_time(time):
+    if time.hour < 0 or time.minute < 0 or time.second < 0:
+        return False
+    if time.minute >= 60 or time.second >= 60:
+        return False
+    return True
+
+
+def int_to_time(seconds):
+    return Time(0, 0, seconds)</code></pre>
+        </div>
+        <div id="exercise-17.2">
+            <h4>Exercise 17.2</h4>
+<ul style="list-style-type:circle;">
+    <li>Write a definition for a class named Kangaroo</li>
+    <li>Write an __init__ method that initializes an attribute named pouch_contents to an empty list.</li>
+    <li>Write a method named put_in_pouch that takes an object of any type and adds it to pouch_contents.</li>
+    <li>Write a __str__ method that returns a string representation of the Kangaroo object and the contents of the pouch.</li>
+</ul>
+<pre><code class="python">class Kangaroo(object):
+    """A Kangaroo is a marsupial."""
+
+    def __init__(self, contents=[]) -> None:
+        """Constructor for a kangaroo object"""
+        if contents is None:
+            contents = []
+        self.pouch_contents = contents
+
+    def __str__(self) -> str:
+        """Return the kangaroo object as a string"""
+        t = [object.__str__(self) + ' with pouch contents:']
+        for obj in self.pouch_contents:
+            s = '    ' + object.__str__(obj)
+            t.append(s)
+        return '\n'.join(t)
+
+    def put_in_pouch(self, item: str) -> None:
+        """The kangaroo puts something new in its pouch"""
+        self.pouch_contents.append(item)
+
+&gt;&gt;&gt; kanga = Kangaroo()
+&gt;&gt;&gt; roo = Kangaroo()
+&gt;&gt;&gt; kanga.put_in_pouch('wallet')
+&gt;&gt;&gt; kanga.put_in_pouch('car keys')
+&gt;&gt;&gt; kanga.put_in_pouch(roo)
+&gt;&gt;&gt; print(kanga)
+&lt;__main__.Kangaroo object at 0x000001ED8A8E8ED0&gt; with pouch contents:
+    'wallet'
+    'car keys'
+    &lt;__main__.Kangaroo object at 0x000001ED8A8E9E10&gt;
+&gt;&gt;&gt; print(roo)
+&lt;__main__.Kangaroo object at 0x000001ED8A8E9E10&gt; with pouch contents:
+    'wallet'
+    'car keys'
+    &lt;__main__.Kangaroo object at 0x000001ED8A8E9E10&gt;</code></pre>
+        </div>
+        <div id="tutorial-lab-1-instance-methods">
+            <h4>Tutorial Lab 1: Instance Methods</h4>
+            <p>Write a method to calculate the body mass index of a person</p>
+            <pre><code class="python"># inside  person class
+def calc_bmi(self):
+    return (self.weight_in_lbs * 703) / self.height_in_inches ** 2
+
+&gt;&gt;&gt; p = Person('Tom', 'Thumb', 150, 62)
+&gt;&gt;&gt; print(p.calc_bmi())
+27.43236212278876</code></pre>
+        </div>
+        <div id="tutorial-lab-2-demonstrating-instance-methods">
+            <h4>Tutorial Lab 2: Demonstrating Instance Methods</h4>
+            <pre><code class="python">&gt;&gt;&gt; p = Person('Tom', 'Thumb', 150, 62) # p is the first instances of the person class
+&gt;&gt;&gt; p2 = Person('Fred', 'Flint', 225, 57) # p2 is the second instances of the person class
+&gt;&gt;&gt; print(p.calc_bmi())
+27.43236212278876
+&gt;&gt;&gt; print(p2.calc_bmi())
+48.68421052631579
+</code></pre>
+        </div>
+        <div id="tutorial-lab-3-static-members">
+            <h4>Tutorial Lab 3: Static Members</h4>
+            <p>Class attributes are attributes that belong to the class rather than the instance.</p>
+            <pre><code class="python"># inside person class
+count = 0
+
+def __init__(self, first, last, weight, height):
+    self.first_name = first
+    self.last_name = last
+    self.weight_in_lbs = weight
+    self.height_in_inches = height
+    Person.count = Person.count + 1
+
+&gt;&gt;&gt; print(Person.count) # p and p2 are the instances so the result should be 2
+2</code></pre>
+        </div>
+        <div id="tutorial-lab-4-static-methods">
+            <h4>Tutorial Lab 4: Static Methods</h4>
+            <p>Class methods are used to access a variable in a class rather than an instance.</p>
+            <pre><code class="python"># inside person class
+@classmethod
+def print_count(cls,):
+    return cls.count
+
+&gt;&gt;&gt; print(Person.print_count())
+2</code></pre>
+        </div>
+        <div id="unit-2-challenge">
+            <h4>Challenge One</h4>
+            <ul style="list-style-type:circle;">
+                <li>Add an instance method called print_self() that outputs the persons first name, last name, weight, height, and BMI</li>
+                <li>Create s method in your Person class that returns a value indicating if the person is underweight, good weight, or overweight, according to the CDC ranges</li>
+            </ul>
+            <pre><code class="python"># inside person class
+def print_self(self):
+    """Display the attributes of an instance of the person class"""
+    print("First Name: " + self.first_name)
+    print("Last Name: " + self.last_name)
+    print("Weight: " + str(self.weight_in_lbs) + "lbs")
+    print("Height: " + str(self.height_in_inches) + " inches")
+    print("BMI: " + str(self.calc_bmi()))
+
+def bmi_range_checker(self):
+    """Return weight status according to CDC BMI ranges"""
+    bmi = self.calc_bmi()
+    if bmi < 18.5:
+        return "Underweight"
+    elif 18.5 < bmi < 25:
+        return "Healthy Weight"
+    elif 25 < bmi_tmp < 30:
+        return "Overweight"
+    else:
+        return "Obesity"</code></pre>
+        </div>
+        <div id="unit-2-stretch-challenge">
+            <h4>Stretch challenge</h4>
+            <p>Create a static version of print self </p>
+            <pre><code class="python"># inside person class
+@classmethod
+def print_self(cls,):
+    for i in inspect.getmembers(Person):
+        if not i[0].startswith('_'):
+            if not inspect.ismethod(i[1]):
+                print(i)</code></pre>
+        </div>
+        <div id="unit-2-self-check-questions">
+            <h4>Self-Check Questions</h4>
+            <p>What is a pure function?</p>
+            <div>
+                <label>
+                    <input type="checkbox" checked disabled readonly/>
+                    A function that does not modify any of the objects passed to it as arguments, and it has no effect, like displaying a value or getting user input, other than returning a value.
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    A function that exists as part of a class but is not utilized inside an instantiated object from that class
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    A function that does modify the objects passed to it as arguments.
+                </label>
+            </div>
+            <p>What is a primary, syntactic difference, between a method and a function?</p>
+            <div>
+                <label>
+                    <input type="checkbox" checked disabled readonly/>
+                    Methods are defined inside a class definition in order to make the relationship between the class and the method explicit
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    Methods are defined inside an instantiated object, and not a class, in order to make the relationship between the object and the method explicit
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    Functions are defined inside a class definition in order to make the relationship between the class and the method explicit
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    Functions are defined inside an instantiated object, and not a class, in order to make the relationship between the object and the method explicit
+                </label>
+            </div>
+            <p>What method is invoked when a new object is created?</p>
+            <div>
+                <label>
+                    <input type="checkbox" checked disabled readonly/>
+                    construct
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    init
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    initialize
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    set
+                </label>
+            </div>
+            <p>What keyword is used to modify the current instance of an object?</p>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    this
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" checked disabled readonly/>
+                    self
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    obj
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    instance
+                </label>
+            </div>
+        </div>
+        <div id="unit-2-extension-activity">
+            <h2>Extension Activity</h2>
+        <p>Write an employee class that allows an employee to book a day of annual leave.</p>
+        <pre><code class="python">class Employee:
+    def __init__(self, first_name, last_name, email, annual_leave_remaining):
+        self._first_name = first_name
+        self._last_name = last_name
+        self._email = email
+        self._annual_leave_remaining = annual_leave_remaining
+
+    def book_annual_leave(self):
+        if self._annual_leave_remaining - 1 >= 0:
+            print("Successfully booked annual leave")
+            self._annual_leave_remaining -= 1
+            print(str(self._annual_leave_remaining) + " days of annual leave remaining")
+        else:
+            print("Unable to book annual leave as you have no more annual leave.")
+
+    @property
+    def first_name(self):
+        return self._first_name
+
+    @property
+    def last_name(self):
+        return self._last_name
+
+    @property
+    def email(self):
+        return self._email
+
+    @property
+    def annual_leave_remaining(self):
+        return self._annual_leave_remaining</code></pre>
+        </div>
+    </div>
+    <div id="collaborative-discussion-peer-responses">
+        <h2>Collaborative Discussion 1</h2>
+        <div class="collaborative-discussion-one-peer-response-one">
+            <h3>Peer Response 1</h3>
+            <p>Miguel used lots of sources and statistics to justify his reasoning. His response could have potentially benefited from more personal insights instead of just referencing what others have said. He offered an interesting argument that I had not previously considered when writing up my inital post where he put service contracts at the top of his list focusing on the legal considerations when reusing code.</p>
+        </div>
+        <div class="collaborative-discussion-one-peer-response-two">
+            <h3>Peer Response 2</h3>
+            <p>While I don't know if it was entirely necessary, I liked that Mario gave a brief overview before giving his justifications as it meant someone without previous knowledge could understand the topic. Maybe Mario could have been more concise in his inital posting as it was quiet long for an inital post. While mine and Marios lists were similar, there were some key differences. For example, Mario put testing very low, whereas I put it very high. Another noticeable different was with design patterns. One of the possible reasons why I have it so low in comparison with Mario is because of my limited exposure to design patterns.</p>
+        </div>
+    </div>
+</div>
+<div class = "navigation">
+    <div style='float: left;'><a href="unit-1.html" class="previous round">&#8249;</a></div>
+    <div style='float: right;'><a href="unit-3.html" class="next round">&#8250;</a></div>
+</div>
+</body>
+</html>

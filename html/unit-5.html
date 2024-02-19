@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 5: More on Classes</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="unit-5">
+    <h1>Unit 5: More on Classes</h1>
+    <h2>Contents</h2>
+    <ul style="list-style-type:circle;">
+        <li><a href="#unit-5-objectives">Unit 5 Objectives</a></li>
+        <li><a href="#unit-5-reflection">Unit 5 Reflection</a></li>
+        <li><a href="#unit-5-codio-activities">Codio Activities</a>
+            <ul style="list-style-type:circle;">
+                <li><a href="#18.1-card-objects">18.1 Card objects</a>
+                <li><a href="#18.2-class-attributes">18.2 Class attributes</a>
+                <li><a href="#18.3-comparing-cards">18.3 Comparing cards</a>
+                <li><a href="#18.4-decks">18.4 Decks</a>
+                <li><a href="#18.5-printing-the-deck">18.5 Printing the deck</a>
+                <li><a href="#18.6-add-remove-shuffle-and-sort">18.6 Add, remove, shuffle and sort</a>
+                <li><a href="#18.7-inheritance">18.7 Inheritance</a>
+                <li><a href="#18.8-class-diagrams">18.8 Class diagrams</a>
+                <li><a href="#18.9-debugging">18.9 Debugging</a>
+                <li><a href="#18.10-data-encapsulation">18.10 Data encapsulation</a>
+                <li><a href="#exercise-18.1">Exercise 18.1</a>
+                <li><a href="#exercise-18.2">Exercise 18.2</a>
+                <li><a href="#unit-5-lab-1">Lab 1: Inherit from a Base Class</a>
+                <li><a href="#unit-5-lab-2">Lab 2: Adding the Child Class</a>
+                <li><a href="#unit-5-lab-challenge">Lab Challenge</a>
+                <li><a href="#unit-5-self-check-questions">Self-Check Questions</a>
+            </ul>
+        </li>
+        <li><a href="#unit-5-e-portfolio-activities">E-Portfolio Activities</a></li>
+    </ul>
+    <div id="unit-5-objectives">
+        <h2>What we did in unit 5</h2>
+        <p>In this unit we did a deep dive into classes in Python.</p>
+    </div>
+    <div id="unit-5-reflection">
+        <h2>Reflection on unit 5</h2>
+        After completing this unit, I gained a greater understanding of how class work in Python and how to incorporate encapsulation, inheritance and abstraction into a Python program. This information proved to be vital when I wrote the code for the system implementation.
+    </div>
+    <div id="unit-5-codio-activities">
+        <h2>Inheritance</h2>
+        <p>Inheritance is when you create a new class that is an extension of an existing class.<br>The child class inherits all the parents' classes, methods and attributes.</p>
+        <div id="18.1-card-objects">
+            <h3>18.1 Card objects</h3>
+            <pre><code class="python">class Card:
+    """Represents a standard playing card."""
+
+    def __init__(self, suit=0, rank=2) -> None:
+        # a card object is made up of a suite and rank, and the default card is the 2 of clubs
+        self.suit = suit
+        self.rank = rank
+
+&gt;&gt;&gt; queen_of_diamonds = Card(1, 12)</code></pre>
+        </div>
+        <div id="18.2-class-attributes">
+            <h3>18.2 Class attributes</h3>
+            <p>Class attributes are attributes that are defined inside a class but outside any methods.</p>
+            <pre><code class="python"># inside card class
+
+# suit_name and rank_names are examples of class attributes
+suit_names = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
+rank_names = [None, 'Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']
+
+def __str__(self):
+    # Class attributes are accessed using the dot notation
+    return '%s of %s' % (Card.rank_names[self.rank], Card.suit_names[self.suit])</code></pre>
+        </div>
+        <div id="18.3-comparing-cards">
+            <h3>18.3 Comparing cards</h3>
+            <p>Programmer defined methods to override the built-in comparison operators</p>
+            <ul style="list-style-type:circle;">
+                <li>__lt__</li>
+                <li>__gt__</li>
+                <li>__eq__</li>
+                <li>__ge__</li>
+                <li>__le__</li>
+                <li>__ne__</li>
+            </ul>
+            <pre><code class="python"># inside card class
+
+def __lt__(self, other):
+    t1 = self.suit, self.rank
+    t2 = other.suit, other.rank
+    return t1 < t2
+
+# Alternative solution
+def __lt__(self, other):
+    # check the suits
+    if self.suit < other.suit: return True
+    if self.suit > other.suit: return False
+
+    # suits are the same so check card ranks
+    return self.rank < other.rank</code></pre>
+            <h4>Exercise</h4>
+            <p>Write an __lt__ method for time objects.</p>
+            <pre><code class="python"># inside class Time:
+def __lt__(self, other):
+    return (self.hour, self.minute) < (other.hour, other.minute)</code></pre>
+        </div>
+        <div id="18.4-decks">
+            <h3>18.4 Decks</h3>
+            <pre><code class="python">class Deck:
+
+    def __init__(self):
+        self.cards = []
+        for suit in range(4):
+            for rank in range(1, 14):
+                card = Card(suit, rank)
+                self.cards.append(card)</code></pre>
+        </div>
+        <div id="18.5-printing-the-deck">
+            <h3>18.5 Printing the deck</h3>
+            <pre><code class="python">#inside class Deck:
+def __str__(self):
+    res = []
+    for card in self.cards:
+        res.append(str(card))
+    return '\n'.join(res)
+
+&gt;&gt;&gt; deck = Deck()
+&gt;&gt;&gt; print(deck)
+Ace of Clubs
+2 of Clubs
+3 of Clubs
+...
+10 of Spades
+Jack of Spades
+Queen of Spades
+King of Spades</code></pre>
+        </div>
+        <div id="18.6-add-remove-shuffle-and-sort">
+            <h3>18.6 Add, remove, shuffle and sort</h3>
+            <pre><code class="python">#inside class Deck:
+
+def pop_card(self):
+    return self.cards.pop()
+
+# this is an example of a veneer method
+def add_card(self, card):
+    self.cards.append(card)
+
+def shuffle(self):
+    random.shuffle(self.cards)</code></pre>
+            <h4>Exercise</h4>
+            <p>Write a deck method named sort that uses the list method sort to sort the cards in a Deck</p>
+            <pre><code class="python"># inside class Deck:
+
+def sort(self):
+    self.cards.sort()</code></pre>
+        </div>
+        <div id="18.7-inheritance">
+            <h3>18.7 Inheritance</h3>
+            <p>Inheritance helps to reduce the amount of code you write as it allows you to reuse code.</p>
+            <pre><code class="python">class Hand(Deck):
+    """Represents a hand of playing cards."""
+
+    def __init__(self, label=''):
+        self.cards = []
+        self.label = label
+
+&gt;&gt;&gt; hand = Hand('new hand')
+&gt;&gt;&gt; hand.cards
+[]
+&gt;&gt;&gt; hand.label
+'new hand'
+&gt;&gt;&gt; deck = Deck()
+&gt;&gt;&gt; card = deck.pop_card()
+&gt;&gt;&gt; hand.add_card(card)
+&gt;&gt;&gt; print(hand)
+King of Spades</code></pre>
+            <h4>Encapsulating move cards</h4>
+            <pre><code class="python">#inside deck class:
+
+# both self and hand can represent either a deck or hand.
+def move_cards(self, hand, num):
+    for i in range(num):
+        hand.add_card(self.pop_card())</code></pre>
+        </div>
+        <div id="18.8-class-diagrams">
+            <h3>18.8 Class diagrams</h3>
+            <p>A class diagram shows classes and the relationships between them.</p>
+            <h4>Types of relationships in a class diagram</h4>
+            <ul style="list-style-type:circle;">
+                <li>Composition = Has a relationship</li>
+                <li>Subsumption = Is a relationship</li>
+                <li>Dependency</li>
+            </ul>
+            <h4>Class Diagram for card, deck and hand</h4>
+            <img src="../img/card%20class%20diagram.jpg" alt="An class diagram showing the relationships between the card deck and hand class">
+            <p>There is a IS-A relationship between hand and deck. There is a HAS-A relationship between deck and cards. The asterisk represents multiplicity</p>
+        </div>
+        <div id="18.9-debugging">
+            <h3>18.9 Debugging</h3>
+            <p>A simple way to verify your code has worked as expected is to add print statements for debugging.</p>
+            <h4>Function for getting the definition for a method</h4>
+            <pre><code class="python">def find_defining_class(obj, meth_name):
+    for ty in type(obj).mro():
+        if meth_name in ty.__dict__:
+            return ty
+&gt;&gt;&gt; hand = Hand()
+&gt;&gt;&gt; find_defining_class(hand, 'shuffle')
+&lt;class 'Card.Deck'&gt;</code></pre>
+        </div>
+        <div id="18.10-data-encapsulation">
+            <h3>18.10 Data encapsulation</h3>
+            <pre><code class="python">import random
+import sys
+
+class Markov:
+
+    def __init__(self):
+        self.suffix_map = {}
+        self.prefix = ()
+
+    def process_file(self, filename, order=2):
+        fp = open(filename)
+        skip_gutenberg_header(fp)
+
+        for line in fp:
+            if line.startswith('*** END OF THIS'):
+                break
+
+            for word in line.rstrip().split():
+                self.process_word(word, order)
+
+    def process_word(self, word, order=2):
+        if len(self.prefix) < order:
+            self.prefix += (word,)
+            return
+
+        try:
+            self.suffix_map[self.prefix].append(word)
+        except KeyError:
+            self.suffix_map[self.prefix] = [word]
+
+        self.prefix = shift(self.prefix, word)
+
+    def random_text(self, n=100):
+        start = random.choice(list(self.suffix_map.keys()))
+
+        for i in range(n):
+            suffixes = self.suffix_map.get(start, None)
+            if suffixes is None:
+                self.random_text(n - i)
+                return
+
+            word = random.choice(suffixes)
+            print(word, end=' ')
+            start = shift(start, word)
+
+
+def skip_gutenberg_header(fp):
+    for line in fp:
+        if line.startswith('*** START OF THIS'):
+            break
+
+
+def shift(t, word):
+    return t[1:] + (word,)
+
+
+def main(script, filename='158-0.txt', n=100, order=2):
+    try:
+        n = int(n)
+        order = int(order)
+    except ValueError:
+        print('Usage: %d filename [# of words] [prefix length]' % script)
+    else:
+        markov = Markov()
+        markov.process_file(filename, order)
+        markov.random_text(n)
+
+
+if __name__ == '__main__':
+    main(*sys.argv)
+</code></pre>
+        </div>
+        <div id="exercise-18.1">
+            <h3>Exercise 18.1</h3>
+            <p>Create a class diagram for the ping pong classes below</p>
+            <pre><code class="python">class PingPongParent:
+    pass
+
+class Ping(PingPongParent):
+    def __init__(self, pong):
+        self.pong = pong
+
+
+class Pong(PingPongParent):
+    def __init__(self, pings=None):
+        if pings is None:
+            self.pings = []
+        else:
+            self.pings = pings
+
+    def add_ping(self, ping):
+        self.pings.append(ping)
+
+pong = Pong()
+ping = Ping(pong)
+pong.add_ping(ping)</code></pre>
+            <img src="../img/class%20diagram.png" alt="An class diagram showing the relationships between the ping, pong and ping pong parent classes">
+        </div>
+        <div id="exercise-18.2">
+            <h3>Exercise 18.2</h3>
+            <p>Write a Deck method called deal_hands that takes two parameters, the number of hands and the number of cards per hand.</p>
+            <pre><code class="python"># inside deck class
+def deal_hands(self, number_of_hands, number_of_cards):
+    hand_list = []
+    for hand in range(number_of_hands):
+    hand = Hand()
+    self.move_cards(hand, number_of_cards)
+    hand_list.append(hand)
+    return hand_list</code></pre>
+        </div>
+        <div id="unit-5-lab-1">
+            <h3>Tutorial Lab 1: Inherit from a Base Class</h3>
+            <pre><code class="python">class Adult(Person):
+    def calc_bmi(self):
+        bmi_tmp = (self.weight_in_lbs * 703) / self.height_in_inches ** 2
+
+        print('BMI number is: ' + str(bmi_tmp))
+
+        if bmi_tmp < 18:
+            self.bmi = 'Underweight'
+        elif bmi_tmp > 18 and bmi_tmp < 25:
+            self.bmi = 'Normal'
+        elif bmi_tmp > 25 and bmi_tmp < 30:
+            self.bmi = 'Overweight'
+        elif bmi_tmp > 30:
+            self.bmi = 'Obese'
+        return self.bmi
+
+&gt;&gt;&gt; a1 = Adult('Tom', 'Thumb', 150, 62, 45, 'M')
+&gt;&gt;&gt; print(a1.first_name)
+Tom
+&gt;&gt;&gt; print(a1.this_age)
+45
+&gt;&gt;&gt; print(a1.calc_bmi())
+27.43236212278876</code></pre>
+        </div>
+        <div id="unit-5-lab-2">
+            <h3>Tutorial Lab 2: Adding the Child Class</h3>
+            <pre><code class="python">class Child(Person):
+
+    def get_male_bmi(self, age, bmi_temp):
+        bmi_class = ''
+        if self.this_age > 2 and self.this_age < 9:
+            if bmi_temp < 14:
+                bmi_class = 'Underweight'
+            elif bmi_temp > 14 and bmi_temp < 17:
+                bmi_class = 'Normal'
+            elif bmi_temp > 17 and bmi_temp < 20:
+                bmi_class = 'Overweight'
+            else:
+                bmi_class = 'Obese'
+
+        elif self.this_age > 9 and self.this_age < 16:
+            if bmi_temp < 17:
+                bmi_class = 'Underweight'
+            elif bmi_temp > 17 and bmi_temp < 23:
+                bmi_class = 'Normal'
+            elif bmi_temp > 23 and bmi_temp < 25:
+                bmi_class = 'Overweight'
+            else:
+                bmi_class = 'Obese'
+
+        elif self.this_age >= 16:
+            if bmi_temp < 19:
+                bmi_class = 'Underweight'
+            elif bmi_temp > 19 and bmi_temp < 23:
+                bmi_class = 'Normal'
+            elif bmi_temp > 23 and bmi_temp < 25:
+                bmi_class = 'Overweight'
+            else:
+                bmi_class = 'Obese'
+
+        return bmi_class
+
+    def get_female_bmi(age, bmi_temp):
+
+        return 'Not implemented'
+
+    def calc_bmi(self):
+        bmi_tmp = (self.weight_in_lbs * 703) / self.height_in_inches ** 2
+        if self.this_gender == 'M':
+            self.bmi = self.get_male_bmi(self.this_age, bmi_tmp)
+        elif self.this_gender == 'F':
+            self.bmi = self.get_female_bmi(self.this_age, bmi_tmp)
+        return self.bmi
+
+&gt;&gt;&gt; a1 = Adult('Tom', 'Thumb', 150, 62)
+&gt;&gt;&gt; c1 = Child('Mark', 'Smith', 98, 48, 15, 'M')
+&gt;&gt;&gt; print(a1.first_name)
+Tom
+&gt;&gt;&gt; print(a1.calc_bmi())
+BMI number is: 27.43236212278876
+Overweight
+&gt;&gt;&gt; print(c1.first_name)
+Mark
+&gt;&gt;&gt; print(c1.calc_bmi())
+Obese</code></pre>
+        </div>
+        <div id="unit-5-lab-challenge">
+            <h3>Challenge</h3>
+            <p>Create a teacher class that inherits from adult with additional attributes for teacher type and bmi risk factor.</p>
+            <pre><code class="python">class Teacher(Adult):
+
+    def __init__(self, teacher_type):
+        self.teacher_type = teacher_type
+        bmi_risk_factor = 0
+        if teacher_type == 'kindergarten':
+            bmi_risk_factor = 1
+        elif teacher_type == 'secondary':
+            bmi_risk_factor = 2
+        elif teacher_type == 'higher ed':
+            bmi_risk_factor = 3
+        self.bmi_risk_factor = bmi_risk_factor</code></pre>
+        </div>
+        <div id="unit-5-self-check-questions">
+            <h3>Self-Check Questions</h3>
+            <p>What is inheritance?</p>
+            <div>
+                <label>
+                    <input type="checkbox" checked disabled readonly/>
+                    The ability to define a new class that is a modified version of an existing class
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    The ability to define two classes with the same name, but different attributes.
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    The ability to define a new class that is an exact copy of an existing class.
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    the ability to define a new class, of a different type, that is a modified version of an existing class.
+                </label>
+            </div>
+            <p>Assume you have a class called Automobile and you want to create another class, called Truck, that inherits from Automobile. Select the correct syntax below.</p>
+            <div>
+                <label>
+                    <input type="checkbox" checked disabled readonly/>
+                    class Automobile(Truck):<br>
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#34;&#34;&#34;Represents a Truck.&#34;&#34;&#34;</label>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    class Truck(Automobile):<br>
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#34;&#34;&#34;Represents a Truck.&#34;&#34;&#34;</label>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    class Automobile(Object): Truck<br>
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#34;&#34;&#34;Represents a Truck.&#34;&#34;&#34;</label>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    class Truck(Object): Automobile<br>
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#34;&#34;&#34;Represents a Truck.&#34;&#34;&#34;</label>
+                </label>
+            </div>
+            <p>Assume we want to track how many automobile objects are created, regardless of the type. How can we accomplish this?</p>
+            <div>
+                <label>
+                    <input type="checkbox" checked disabled readonly/>
+                    Create a class attribute in the Automobile class, outside of any method, to represent a class, or static variable.
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    Create an instance attribute in each inherited class, outside of any method, to represent a class, or static variable
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    Create a variable in the init method of the Automobile class that increments the count by one for each instance object created
+                </label>
+            </div>
+            <p>What does the “Is-A” relationship refer to?</p>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    The relationship between a parent class and its child class
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" checked disabled readonly/>
+                    The relationship between a child class and its parent class
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    The relationship between a child class and its parent classes attributes
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    The relationship between a parent class and its child classes attributes
+                </label>
+            </div>
+        </div>
+    </div>
+    <div id="unit-5-e-portfolio-activities">
+        <h2>E-Portfolio Activities</h2>
+        <p>Write a Python program with polymorphism that is usable within the summative assessment for the driverless car.</p>
+        <pre><code class="python">class Car:
+    def __init__(self, make = None, model = None, year = None):
+        self.make = make
+        self.model = model
+        self.year = year
+
+    def info(self):
+        print(f'The car you are driving is a {self.year} {self.make} {self.model}')
+
+    def accelerate(self):
+        print("Car accelerating")
+
+
+class Motorcycle:
+    def __init__(self, make = None, model = None, year = None):
+        self.make = make
+        self.model = model
+        self.year = year
+
+    def info(self):
+        print(f'The motorbike you are driving is a {self.year} {self.make} {self.model}')
+
+    def accelerate(self):
+        print("Motorcycle accelerating")
+
+class Truck:
+    def __init__(self, make = None, model = None, year = None):
+        self.make = make
+        self.model = model
+        self.year = year
+
+    def info(self):
+       print(f'The truck you are driving is a {self.year} {self.make} {self.model}')
+
+    def accelerate(self):
+        print("Truck accelerating")
+
+&gt;&gt;&gt; car = Car("Telsa", "Model 3", 2024) # A car object
+&gt;&gt;&gt; motorbike = Motorcycle("Honda", "PCX 125", 2024)  # A motorbike object
+&gt;&gt;&gt; lorry = Truck("DAF", "XG", 2024) # A Truck object
+&gt;&gt;&gt; for x in (car, motorbike, lorry):
+        x.info()
+        x.accelerate()
+The car you are driving is a 2024 Telsa Model 3
+Car accelerating
+The motorbike you are driving is a 2024 Honda PCX 125
+Motorcycle accelerating
+The truck you are driving is a 2024 DAF XG
+Truck accelerating</code></pre>
+    </div>
+</div>
+<div class = "navigation">
+    <div style='float: left;'><a href="unit-4.html" class="previous round">&#8249;</a></div>
+    <div style='float: right;'><a href="unit-6.html" class="next round">&#8250;</a></div>
+</div>
+</body>
+</html>

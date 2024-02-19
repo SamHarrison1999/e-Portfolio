@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 8: Data Structures and Data Search in Practice</title>
+          <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="unit-8">
+        <h1>Unit 8: Data Structures and Data Search in Practice</h1>
+        <h2>Contents</h2>
+        <ul style="list-style-type:circle;">
+            <li><a href="#unit-8-objectives">Unit 8 Objectives</a></li>
+            <li><a href="#unit-8-reflection">Unit 8 Reflection</a></li>
+            <li><a href="#collaborative-discussion-2">Collaborative Discussion 2</a></li>
+            <li>
+                <a href="#unit-8-codio-activities">
+                    Codio Activities
+                </a>
+                <ul>
+                    <li><a href="#what-is-recursion">What is Recursion?</a></li>
+                    <li><a href="#fibonacci-sequence">Fibonacci Sequence</a></li>
+                    <li><a href="#recursion-formative-assessment">Recursion Formative Assessment</a></li>
+                    <li><a href="#lab-1-recursive-tree">Lab 1 - Recursive Tree</a></li>
+                    <li><a href="#lab-2-the-hilbert-curve">Lab 2 - The Hilbert Curve</a></li>
+                    <li><a href="#lab-3-sierpinski-triangle">Lab 3 - Sierpinski Triangle</a></li>
+                    <li><a href="#lab-challenge">Lab Challenge</a></li>
+                    <li><a href="#recursion-exercise-1">Recursion Exercise 1</a></li>
+                    <li><a href="#recursion-exercise-2">Recursion Exercise 2</a></li>
+                    <li><a href="#recursion-exercise-3">Recursion Exercise 3</a></li>
+                    <li><a href="#recursion-exercise-4">Recursion Exercise 4</a></li>
+                    <li><a href="#recursion-exercise-5">Recursion Exercise 5</a></li>
+                    <li><a href="#what-is-polymorphism">What is Polymorphism?</a></li>
+                    <li><a href="#method-overriding">2. Method Overriding</a></li>
+                    <li><a href="#method-overloading">3. Method Overloading</a></li>
+                    <li><a href="#operator-overloading">4. Operator Overloading</a></li>
+                    <li><a href="#magic-methods">5. Magic Methods</a></li>
+                    <li><a href="#duck-typing">6. Duck Typing</a></li>
+                    <li><a href="#polymorphism-formative-assessment">Polymorphism Formative Assessment</a></li>
+                    <li><a href="#polymorphism-lab-1">Polymorphism Lab 1</a></li>
+                    <li><a href="#polymorphism-lab-2">Polymorphism Lab 2</a></li>
+                    <li><a href="#polymorphism-lab-3">Polymorphism Lab 3</a></li>
+                    <li><a href="#polymorphism-lab-4">Polymorphism Lab 4</a></li>
+                    <li><a href="#polymorphism-lab-challenge">Polymorphism Lab Challenge</a></li>
+                    <li><a href="#polymorphism-exercise-1">Polymorphism Exercise 1</a></li>
+                    <li><a href="#polymorphism-exercise-2">Polymorphism Exercise 2</a></li>
+                    <li><a href="#polymorphism-exercise-3">Polymorphism Exercise 3</a></li>
+                    <li><a href="#polymorphism-exercise-4">Polymorphism Exercise 4</a></li>
+                    <li><a href="#polymorphism-exercise-5">Polymorphism Exercise 5</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div id="unit-8-objectives">
+            <h2>What we did in unit 8</h2>
+            <p>In this module we looked at the different data structures in Python and the different operations which can be performed on each data structure.</p>
+        </div>
+        <div id="unit-8-reflection">
+            <h2>Reflection on unit 8</h2>
+            <p>This unit gave me a greater understanding of the different data structures in Python. Knowing the different operations you can perform on a data structure allowed me to make my code for the system implementation more efficient as instead of writing the code myself I used pythons built in methods. For example writing a for loop to  iterate over the duration list and comparing each item in the list and sorting it find the quickest route I used the build in lambda and sort function to sort the list based on the duration.</p>
+        </div>
+        <div id="collaborative-discussion-2">
+            <h2>Collaborative Discussion 2</h2>
+            <p>Making reference to the article by Fortino et al. (2015), consider the strengths and weaknesses of designing a metamodel to support object-oriented design of the IoT. Design a smart model equivalent to that presented in Figure 6 which would instead support operation of a driverless car.</p>
+            <p>Metamodels have a crucial role to play as they are used for the analysis, design and implementation of a system. In The article Giancarlo Fortino used the JACOSO, ACOSO, ELDA & high-level smart object metamodels to design a smart office. After reading the article I believe the advantages of designing a metamodel to support object oriented design are; it details interactions and relationships within a system, it provides a blueprint of the system, it allows you to model components and it supports prototyping. The only real drawbacks are that it is time-consuming to create which is a big concern if your being pressured to meet certain deadlines and can be complex making it difficult for laymen to understand . The fact meta models are very general is both a postive and negative as a metamodel can be used for many different scenarios but it may not give you all the information you want. Metamodels should be created at different levels of abstraction to support all stages of development (design, analysis, and implementation).</p>
+            <img src="../img/smart%20model%20for%20autonomous%20vehicle.png" alt="smart model design for an autonomous vehicle">
+            <h3>References</h3>
+            <p>Fortino, G., Guerrieri, A., Russo, W. & Savaglio, C. (2015) Towards a Development Methodology for Smart Object-Oriented IoT Systems: A Metamodel Approach. 2015 IEEE International Conference on Systems, Man, and Cybernetics. 1297-1302. </p>
+        </div>
+        <div id="unit-8-codio-activities">
+            <h2>Recursion</h2>
+            <div id="what-is-recursion">
+                <h3>What is Recursion?</h3>
+                <p>Using self-similar functions to solve a problem</p>
+                <h3>Factorial recursive function</h3>
+                <pre><code class="python">def factorial(n):
+    """Calculate factorial recursively"""
+    if n <= 0:
+        return 0
+    else:
+        return n * factorial(n - 1)
+&gt;&gt;&gt; print(factorial(5))
+120</code></pre>
+                <h3>Base Case vs. Recursive Case</h3>
+                <p>The recursive case is where the function calls itself with a different parameter.<br>The base case is where the function stops calling itself and returns a value.<br>Without the base case the function will get stuck in an infinite loop.</p>
+                <h3>Reading Question</h3>
+                <p>Under what circumstances does it make sense to use recursion?</p>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Recursion can be used at any time
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Recursion works best when the solution is self-similar
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Recursion is too hard; avoid it at all costs
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Recursion only works with mathematical concepts like factorial and the Fibonacci sequence
+                    </label>
+                </div>
+            </div>
+            <div id="fibonacci-sequence">
+                <h3>Fibonacci Number</h3>
+                <pre><code class="python">def fibonacci(n):
+    """Calculate Fibonacci numbers"""
+    if n <= 1:
+        return n
+    else:
+        return(fibonacci(n-1) + fibonacci(n-2))
+
+&gt;&gt;&gt; print(fibonacci(3))
+2</code></pre>
+                <h3>Fibonacci Sequence</h3>
+                <pre><code class="python">def fibonacci(n):
+    """Calculate Fibonacci numbers"""
+    if n <= 1:
+        return n
+    else:
+        return(fibonacci(n-1) + fibonacci(n-2))
+
+&gt;&gt;&gt; fibonacci_length = 10
+&gt;&gt;&gt; for num in range(fibonacci_length):
+    print(fibonacci(num))
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34</code></pre>
+                <h4>Alternative Solution</h4>
+                <pre><code class="python">fibcache = {} #dictionary of Fibonacci numbers
+
+def fibonacci(n):
+    """Check to see if a Fibonacci number has been calculated (in the dictionary).
+    If not, add it to the dictionary and return it.
+    If yes, return the number from the dictionary."""
+    if n not in fibcache.keys():
+        fibcache[n] = _fibonacci(n)
+    return fibcache[n]
+
+def _fibonacci(n):
+    """Calculate Fibonacci number"""
+    if n <= 1:
+        return n
+    else:
+        fib = fibonacci(n-1) + fibonacci(n-2)
+        return fib
+
+fibonacci_length = 90
+for num in range(fibonacci_length):
+    print(fibonacci(num))</code></pre>
+                <h3>Reading Question</h3>
+                <p>What is the purpose of the base case in recursion?</p>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        The base case tells the function to call itself.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        The base case is another name for recursion.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        The base case is the name of the recursive function.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        When true, the base case stops the recursive calls and returns a value.
+                    </label>
+                </div>
+            </div>
+            <div id = "recursion-formative-assessment">
+                <h3>Formative Assessment</h3>
+            </div>
+            <div id="formative-assessment-1">
+                <h4>Formative Assessment 1</h4>
+                <p>Rearrange the code blocks below to create a recursive function that finds the sum of n integers</p>
+                <pre><code class="python">def find_sum(n):
+    """Recursively calculate the sum of the first n numbers"""
+    if n == 0:
+        return 0
+    else:
+        return(n + find_sum(n-1))</code></pre>
+            </div>
+            <div id="formative-assessment-2">
+                <h4>Formative Assessment 2</h4>
+                <p>Assume you want to write a recursive function that multiplies each element in a list by the number 5. What should the base case be?</p>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        When the length of the list is 1
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        When the length of the list is 0
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        When the list is equal to 1
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        When the list is equal to 0
+                    </label>
+                </div>
+            </div>
+            <div id="lab-1-recursive-tree">
+                <h3>Lab 1 - Recursive Tree</h3>
+                <pre><code class="python">import turtle
+
+t = turtle.Turtle()
+t.lt(90)
+t.penup()
+t.backward(150)
+t.pendown()
+t.speed(10)
+
+
+def recursive_tree(branch_length, angle, t):
+    """Draw a tree recursively"""
+    if branch_length > 1:
+        t.forward(branch_length)
+        t.right(angle)
+        recursive_tree(branch_length - 7, angle, t)
+        t.left(angle * 2)
+        recursive_tree(branch_length - 7, angle, t)
+        t.right(angle)
+        t.backward(branch_length)
+
+
+recursive_tree(60, 20, t)
+turtle.mainloop()</code></pre>
+                <h4>Lab Question</h4>
+                <p>Look at the code below. Select the answer that best describes why the code is problematic.</p>
+                <pre><code class="python">def recursive_function(num):
+    if num < 0:
+        return 1
+    else:
+        return num + recursive_function(num)</code></pre>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        There is nothing wrong with the function
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        The base case should be if num < 5:
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        When using recursion, num should get smaller so that the base case becomes true
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        It should be return num - recursive_function(num)
+                    </label>
+                </div>
+            </div>
+            <div id="lab-2-the-hilbert-curve">
+                <h3>Lab 2 - The Hilbert Curve</h3>
+                <pre><code class="python">import turtle
+
+t = turtle.Turtle()
+
+
+def hilbert(dist, rule, angle, depth, t):
+    if depth > 0:
+
+        if rule == 1:
+            t.left(angle)
+            hilbert(dist, 2, angle, depth - 1, t)
+            t.forward(dist)
+            t.right(angle)
+            hilbert(dist, 1, angle, depth - 1, t)
+            t.forward(dist)
+            hilbert(dist, 1, angle, depth - 1, t)
+            t.right(angle)
+            t.forward(dist)
+            hilbert(dist, 2, angle, depth - 1, t)
+            t.left(angle)
+
+        if rule == 2:
+            t.right(angle)
+            hilbert(dist, 1, angle, depth - 1, t)
+            t.forward(dist)
+            t.left(angle)
+            hilbert(dist, 2, angle, depth - 1, t)
+            t.forward(dist)
+            hilbert(dist, 2, angle, depth - 1, t)
+            t.left(angle)
+            t.forward(dist)
+            hilbert(dist, 1, angle, depth - 1, t)
+            t.right(angle)
+
+
+hilbert(5, 1, 90, 5, t)
+turtle.mainloop()</code></pre>
+                <h4>Lab Question</h4>
+                <p>Rearrange the blocks below to create a recursive function. Assume that the recursive function is called with this code: my_recursive_function(15)</p>
+                <pre><code class="python">def my_recursive_function(num):
+    """Creates a recursive function"""
+    if num < 0:
+        return 1
+    else:
+        return num + my_recursive_function(num - 1)</code></pre>
+            </div>
+            <div id="lab-3-sierpinski-triangle">
+                <h3>Lab 3 - Sierpinski Triangle</h3>
+                <pre><code class="python">import turtle
+
+t = turtle.Turtle()
+t.speed(10)
+
+
+def sierpinski(length, n):
+    if n == 1:
+        draw_triangle(length)
+    else:
+        sierpinski(length, n - 1)
+        t.rt(120)
+        t.fd(length * 2 ** (n - 2))
+        sierpinski(length, n - 1)
+        t.lt(120)
+        t.fd(length * 2 ** (n - 2))
+        sierpinski(length, n - 1)
+        t.fd(length * 2 ** (n - 2))
+
+
+def draw_triangle(length):
+    t.setheading(180)
+    for i in range(3):
+        t.rt(120)
+        t.fd(length)
+
+
+sierpinski(20, 4)
+
+turtle.mainloop()</code></pre>
+                <h4>Lab Question</h4>
+                <p>What is the relationship between the draw_triangle function and the sierpinski function?</p>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        sierpinski is a helper function for draw_triangle
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        draw_triangle is a helper function for sierpinski
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        draw_triangle is declared inside sierpinski
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        draw_triangle is called as a parameter for the sierpinski function
+                    </label>
+                </div>
+                <p>draw_triangle is a helper function for sierpinski because the sierpinski function calls draw_triangle.</p>
+            </div>
+            <div id="lab-challenge">
+                <h3>Lab Challenge</h3>
+                <p>Write a recursive function called recursive_power that takes two integers as parameters. The first parameter is the base and the second parameter is the exponent. Return the base parameter to the power of the exponent.</p>
+                <pre><code class="python">def recursive_power(n1, n2):
+    if n2 == 0:
+        return 1
+    else:
+        return n1 * recursive_power(n1, n2 - 1)
+
+
+print(recursive_power(5, 3))
+print(recursive_power(4, 5))</code></pre>
+            </div>
+            <div id="recursion-exercise-1">
+                <h3>Recursion Exercise 1</h3>
+                <p>Write a recursive function called recursive_sum that takes an integer as a parameter. Return the sum of all integers between 0 and the number passed to recursive_sum.</p>
+                <pre><code class="python">def recursive_sum(num):
+    if num < 1:
+        return num
+    else:
+        return num + recursive_sum(num - 1)
+
+
+print(recursive_sum(5))
+print(recursive_sum(10))</code></pre>
+            </div>
+            <div id="recursion-exercise-2">
+                <h3>Recursion Exercise 2</h3>
+                <p>Write a recursive function called list_sum that takes a list of numbers as a parameter. Return the sum of all of the numbers in the list.</p>
+                <pre><code class="python">def list_sum(num_list):
+    if len(num_list) == 1:
+        return num_list[0]
+    else:
+        return num_list[0] + list_sum(num_list[1:])
+
+
+print(list_sum([1, 2, 3, 4, 5]))
+print(list_sum([10, 12.5, 10, 7]))</code></pre>
+            </div>
+            <div id="recursion-exercise-3">
+                <h3>Recursion Exercise 3</h3>
+                <p>Write a recursive function called bunny_ears that takes the number of bunnies as a parameter and returns the number of bunny ears.</p>
+                <pre><code class="python">def bunny_ears(bunnies):
+    if bunnies < 1:
+        return 0
+    else:
+        return 2 + bunny_ears(bunnies - 1)
+
+
+print(bunny_ears(8))
+print(bunny_ears(0))</code></pre>
+            </div>
+            <div id="recursion-exercise-4">
+                <h3>Recursion Exercise 4</h3>
+                <p>Write a recursive function called reverse_string that takes a string as a parameter. Return the string in reverse order.</p>
+                <pre><code class="python">def reverse_string(s):
+    if (len(s)) == 0:
+        return ""
+    else:
+        return reverse_string(s[1:]) + s[0]
+
+
+print(reverse_string("cat"))
+print(reverse_string("house"))</code></pre>
+            </div>
+            <div id="recursion-exercise-5">
+                <h3>Recursion Exercise 5</h3>
+<p>Write a recursive function called get_max that takes a list of numbers as a parameter and returns the largest number in the list.</p>
+<pre><code class="python">def get_max(nums):
+    if len(nums) == 1:
+        return nums[0]
+    else:
+        return max(nums[0], get_max(nums[1:]))
+
+
+print(get_max([1, 2, 3, 4, 5]))
+print(get_max([11, 22, 3, 41, 15]))
+</code></pre>
+            </div>
+            <h2>Polymorphism</h2>
+            <div id="what-is-polymorphism">
+                <h3>What is Polymorphism?</h3>
+                <p>Polymorphism is a concept in object-oriented programming in which a single interface is applicable with different types.</p>
+            </div>
+            <div id="method-overriding">
+                <h3>2. Method Overriding</h3>
+                <p>Override a method is where you have two methods with the same name that do different things</p>
+                <pre><code class="python">class Alpha:
+  def show(self):
+    print("I am from class Alpha")
+
+  def hello(self):
+    print("Hello from Alpha")
+
+class Bravo(Alpha):
+  def show(self):
+    print("I am from class Bravo")
+
+  def hello(self):
+    print("Hello from Bravo")
+
+test_object = Alpha()
+test_object.hello()
+test_object_two = Bravo()
+test_object.hello()</code></pre>
+                <h4>Reading Question</h4>
+                <p>Why is method overriding an example of polymorphism?</p>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Method overriding has a single interface (the method name), but only works with a single data type (the child class).
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Method overriding has a single interface (the method name) and works with different types (the parent and child classes).
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Method overriding is not an example of polymorphism, it is an example of inheritance.
+                    </label>
+                </div>
+            </div>
+            <div id="method-overloading">
+                <h3>3. Method Overloading</h3>
+                <p>Method overloading occurs when you have a single method name that can take different sets of parameters.</p>
+                <pre><code class="python">class TestClass:
+    def sum(self, a=None, b=None, c=None, d=None, e=None):
+        if (a is not None and
+                b is not None and
+                c is not None and
+                d is not None and
+                e is not None):
+            return a + b + c + d + e
+        elif (a is not None and
+              b is not None and
+              c is not None and
+              d is not None):
+            return a + b + c + d
+        elif (a is not None and
+              b is not None and
+              c is not None):
+            return a + b + c
+        elif a is not None and b is not None:
+            return a + b
+        elif a is not None:
+            return a
+        else:
+            return 0
+
+obj = TestClass()
+print(obj.sum())
+print(obj.sum(1))
+print(obj.sum(1, 2))
+print(obj.sum(1, 2, 3))
+print(obj.sum(1, 2, 3, 4))
+print(obj.sum(1, 2, 3, 4, 5))</code></pre>
+                <p>It is recommended to use none to represent the absence of a value</p>
+                <h4>Reading Question</h4>
+                <p>What is the output of the following code?</p>
+                <pre><code class="python">class ExampleClass:
+    def total_chars(self, s1 = None, s2 = None, s3 = None):
+        if s1 is None and s2 is None and s3 is None:
+            return len(s1) + len(s2) + len(s3)
+        elif s1 is None and s2 is None:
+            return len(s1) + len(s2)
+        elif s1 is None:
+            return len(s1)
+        else:
+            return 0
+
+obj = ExampleClass()
+print(obj.total_chars('hello', 'world'))</code></pre>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Error message
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        0
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        10
+                    </label>
+                </div>
+            </div>
+            <div id="operator-overloading">
+                <h3>4. Operator Overloading</h3>
+                <p>When a single operator can be used with many data types, this is called operator overloading.</p>
+                <pre><code class="python">my_string = "polymorphism"
+num1 = 3
+num2 = 5
+print(num1 * num2)
+print(my_string * num1)</code></pre>
+                <h4>Overloading operators for custom classes</h4>
+                <pre><code class="python">class FinancialAccount:
+  def __init__(self, amount):
+    self.account = amount
+
+  def __add__(self, other):
+    return self.account + other.account
+
+class BankAccount(FinancialAccount):
+  pass
+
+class InvestmentAccount(FinancialAccount):
+  pass
+
+my_banking = BankAccount(500)
+my_investments = InvestmentAccount(750)
+print(my_investments + my_banking)</code></pre>
+                <h4>Reading Question</h4>
+                <p>Use the code blocks below to overload the subtraction operator so that the amount attributes are subtracted from one another. </p>
+                <pre><code class="python">def __sub__(self, other):
+    self.amount - other.amount
+</code></pre>
+            </div>
+            <div id="magic-methods">
+                <h3>5. Magic Methods</h3>
+                <p>Magic methods also known as dunder methods are the methods for operator overloading with leading and trailing double underscores</p>
+                <ul style="list-style-type:circle;">
+                    <li>The magic method for addition is <code>object.__add__(self, other)</code></li>
+                    <li>The magic method for subtraction is <code>object.__sub__(self, other)</code></li>
+                    <li>The magic method for multiplication is <code>object.__mul__(self, other)</code></li>
+                    <li>The magic method for division is <code>object.__truediv__(self, other)</code></li>
+                    <li>The magic method for floor division is <code>object.__floordiv__(self, other)</code></li>
+                    <li>The magic method for less than is <code>object.__lt__(self, other)</code></li>
+                    <li>The magic method for less than or equal to is <code>object.__le__(self, other)</code></li>
+                    <li>The magic method for equal to is <code>object.__eq__(self, other)</code></li>
+                    <li>The magic method for not equal to is <code>object.__ne__(self, other)</code></li>
+                    <li>The magic method for greater than is <code>object.__gt__(self, other)</code></li>
+                    <li>The magic method for greater than or equal to is <code>object.__ge__(self, other)</code></li>
+                </ul>
+                <pre><code class="python"># inside class FinancialAccount:
+def __eq__(self, other):
+    return self.account == other.account
+
+def __truediv__(self, other):
+    return self.account / other.account
+
+def __floordiv__(self, other):
+    return self.account // other.account</code></pre>
+                <h4>Reading Question</h4>
+                <p>What is wrong with the following code?</p>
+                <pre><code class="python">class Alpha:
+    def __init__(self, value):
+        self.value = value
+
+    def __gt__(self, other):
+        return self.value > other.value
+
+class Bravo(Alpha):
+    pass
+
+class Charlie(Alpha):
+    pass
+
+example1 = Bravo(10)
+example2 = Charlie(7)
+
+print(example1 >= example2)</code></pre>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        The comparison operator in the print statement is wrong. It should be <.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        The comparison operator in the print statement is wrong. It should be >.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        The comparison operator in the print statement is wrong. It should be <=.
+                    </label>
+                </div>
+            </div>
+            <div id="duck-typing">
+                <h3>6. Duck Typing</h3>
+                <p>Duck typing is used to determine the suitability of an object based on what it does.</p>
+                <pre><code class="python">import random
+
+
+class BaseballPlayer:
+    def hit(self):
+        """Generate a random integer 1 to 4 and return the type of hit"""
+        total_bases = random.randint(1, 4)
+        if total_bases == 1:
+            return "single"
+        elif total_bases == 2:
+            return "double"
+        elif total_bases == 3:
+            return "triple"
+        else:
+            return "home run"
+
+
+class Song:
+    def __init__(self, title, ranking):
+        self.title = title
+        self.ranking = ranking
+
+    def hit(self):
+        """A song is a hit if it appeared in a top 40 chart"""
+        if self.ranking <= 40:
+            return f"{self.title} is a hit song"
+        else:
+            return f"{self.title} is not a hit song"
+
+
+class Boxer:
+    def hit(self):
+        return "jab"
+
+
+class Dancer:
+    def pirouette(self):
+        return "Spin, spin, spin"
+
+
+def print_hit(obj):
+    try:
+        print(obj.hit())
+    except AttributeError as e:
+        print(e)
+
+
+if __name__ == "__main__":
+    my_player = BaseballPlayer()
+    my_song = Song("Hey Jude", 12)
+    my_boxer = Boxer()
+    print_hit(my_boxer)
+    print_hit(my_player)
+    print_hit(my_song)
+    my_dancer = Dancer()
+    print_hit(my_dancer)</code></pre>
+                <h4>Another example of duck typing</h4>
+                <pre><code class="python">class Bird:
+    def fly(self):
+        return "I am flapping my wings"
+
+
+class Car:
+    def drive(self):
+        return "My wheels are turning"
+
+
+def print_fly(obj):
+    try:
+        print(obj.fly())
+    except AttributeError as e:
+        print(e)
+
+
+if __name__ == "__main__":
+    my_bird = Bird()
+    my_car = Car()
+    print_fly(my_bird)
+    print_fly(my_car)</code></pre>
+                <h4>Reading Question</h4>
+                <p>Duck typing is when the suitability of an object is determined by what it is, not by what it does. True or False?</p>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        True
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        False
+                    </label>
+                </div>
+            </div>
+            <div id="polymorphism-formative-assessment">
+                <h2>Formative Assessment</h2>
+            </div>
+            <div id="polymorphism-formative-assessment-1">
+                <h3>7. Polymorphism Formative Assessment 1</h3>
+                <p>Mark all of the ways in which polymorphism can be implemented.</p>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Method overriding
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Duck typing
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Magic methods
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Method overloading
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Operator overloading
+                    </label>
+                </div>
+            </div>
+            <div id="polymorphism-formative-assessment-2">
+                <h3>7. Polymorphism Formative Assessment 2</h3>
+                <p>Create a method that overloads the not equal operator.</p>
+                <pre><code class="python">def __ne__(self, other):
+    return self.value != other.value</code></pre>
+            </div>
+            <div id="polymorphism-lab-1">
+                <h3>Polymorphism Lab 1</h3>
+                <p>Setting up the contacts class and display method</p>
+                <pre><code class="python">class Contacts:
+    def __init__(self):
+        self.view = 'list'
+        self.contact_list = []
+        self.choice = None
+        self.index = None
+
+    def display(self):
+        while True:
+            if self.view == 'list':
+                self.show_list()
+            elif self.view == 'info':
+                self.show_info()
+            elif self.view == 'add':
+                print()
+                self.add_contact()
+            elif self.view == 'quit':
+                print('\nClosing the contact list...\n')
+                break
+
+    def show_list(self):
+        pass
+
+    def show_info(self):
+        pass
+
+    def add_contact(self):
+        pass</code></pre>
+                <h4>Lab Question</h4>
+                <p>Use the method definition below to help you answer the question.</p>
+                <p>The code sample above is representative of which form of polymorphism?</p>
+                <pre><code class="python">def my_method(self, a = None, b = None, c = None):
+    # rest of the method goes here</code></pre>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Method overriding
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Duck typing
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Method overloading
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Operator overloading
+                    </label>
+                </div>
+            </div>
+            <div id="polymorphism-lab-2">
+                <h3>Polymorphism Lab 2</h3>
+                <p>Adding a contact, handling user choices and setting up the information class.</p>
+                <pre><code class="python">class Contacts:
+    def __init__(self):
+        self.view = 'list'
+        self.contact_list = []
+        self.choice = None
+        self.index = None
+
+    def display(self):
+        while True:
+            if self.view == 'list':
+                self.show_list()
+            elif self.view == 'info':
+                self.show_info()
+            elif self.view == 'add':
+                print()
+                self.add_contact()
+            elif self.view == 'quit':
+                print('\nClosing the contact list...\n')
+                break
+
+    def show_list(self):
+    print()
+    if len(self.contact_list) == 0:
+        self.choice = input('(A)dd a new contact \n(Q)uit \n> ').lower()
+    else:
+        self.view = 'quit'
+    self.handle_choice()
+
+    def show_info(self):
+        pass
+
+    def __add__(self, new_contact):
+        self.contact_list.append(new_contact)
+
+    def add_contact(self):
+        self + Information()
+        self.view = 'list'
+
+    def handle_choice(self):
+        if self.choice == 'q':
+            self.view = 'quit'
+        elif self.choice == 'a' and self.view == 'list':
+            self.view = 'add'
+
+class Information:
+    def __init__(self):
+        self.first_name = input('Enter their first name: ')
+        self.last_name = input('Enter their last name: ')
+        self.personal_phone = input('Enter their personal phone number: ')
+        self.personal_email = input('Enter their personal email address: ')
+        self.work_phone = input('Enter their work phone number: ')
+        self.work_email = input('Enter their work email address: ')
+        self.title = input('Enter their work title: ')
+
+contacts = Contacts()
+contacts.display()
+print(len(contacts.contact_list))</code></pre>
+                <h4>Lab Question</h4>
+                <p>Drag the correct blocks into the box below such that the + operator is overloaded</p>
+                <pre><code class="python">def __add__(self, other):
+    return self.value + other.value</code></pre>
+            </div>
+            <div id="polymorphism-lab-3">
+                <h3>Polymorphism Lab 3</h3>
+                <p>Displaying the contacts and handling numeric input</p>
+                <pre><code class="python">class Contacts:
+    def __init__(self):
+        self.view = 'list'
+        self.contact_list = []
+        self.choice = None
+        self.index = None
+
+    def display(self):
+        while True:
+            if self.view == 'list':
+                self.show_list()
+            elif self.view == 'info':
+                self.show_info()
+            elif self.view == 'add':
+                print()
+                self.add_contact()
+            elif self.view == 'quit':
+                print('\nClosing the contact list...\n')
+                break
+
+    def show_list(self):
+        print()
+        if len(self.contact_list) == 0:
+            self.choice = input('(A)dd a new contact \n(Q)uit \n> ').lower()
+        else:
+            for index, contact in enumerate(self.contact_list):
+                print(f"{index + 1}) {contact.first_name} {contact.last_name}")
+            self.choice = input('\n(#) Select a name \n(A)dd a new contact\n(Q)uit \n> ').lower()
+        self.handle_choice()
+
+    def show_info(self):
+        pass
+
+    def __add__(self, new_contact):
+        self.contact_list.append(new_contact)
+
+    def add_contact(self):
+        self + Information()
+        self.view = 'list'
+
+    def handle_choice(self):
+        if self.choice == 'q':
+            self.view = 'quit'
+        elif self.choice == 'a' and self.view == 'list':
+            self.view = 'add'
+        elif self.choice.isnumeric() and self.view == 'list':
+            index = int(self.choice) - 1
+            if index >= 0 and index < len(self.contact_list):
+                self.index = index
+                self.view = 'info'
+
+class Information:
+    def __init__(self):
+        self.first_name = input('Enter their first name: ')
+        self.last_name = input('Enter their last name: ')
+        self.personal_phone = input('Enter their personal phone number: ')
+        self.personal_email = input('Enter their personal email address: ')
+        self.work_phone = input('Enter their work phone number: ')
+        self.work_email = input('Enter their work email address: ')
+        self.title = input('Enter their work title: ')
+
+contacts = Contacts()
+contacts.display()</code></pre>
+                <h4>Lab Question</h4>
+                <p>Method Overriding is when a child class has a method with the same name as the parent class, but the child class performs a different task.</p>
+                <p>Method Overloading is when a method performs different tasks depending on its parameters</p>
+                <p>Operator Overloading is when operators have different functions depending on their arguments</p>
+                <p>Duck Typing is when you check for the presence of a method or attribute instead of type</p>
+            </div>
+            <div id="polymorphism-lab-4">
+                <h3>Polymorphism Lab 4</h3>
+                <p>Displaying Contact Info, returning the contacts, switching between the next and previous contact</p>
+                <pre><code class="python">class Contacts:
+    def __init__(self):
+        self.view = 'list'
+        self.contact_list = []
+        self.choice = None
+        self.index = None
+
+    def display(self):
+        while True:
+            if self.view == 'list':
+                self.show_list()
+            elif self.view == 'info':
+                self.show_info()
+            elif self.view == 'add':
+                print()
+                self.add_contact()
+            elif self.view == 'quit':
+                print('\nClosing the contact list...\n')
+                break
+
+    def show_list(self):
+        print()
+        if len(self.contact_list) == 0:
+            self.choice = input('(A)dd a new contact \n(Q)uit \n> ').lower()
+        else:
+            for index, contact in enumerate(self.contact_list):
+                print(f"{index + 1}) {contact.first_name} {contact.last_name}")
+            self.choice = input('\n(#) Select a name \n(A)dd a new contact\n(Q)uit \n> ').lower()
+        self.handle_choice()
+
+    def show_info(self):
+        self.contact_list[self.index].display_info()
+        self.choice = input('\n(C)ontact List \n(P)revious contact \n(N)ext contact \n(Q)uit \n> ').lower()
+        self.handle_choice()
+
+    def __add__(self, new_contact):
+        self.contact_list.append(new_contact)
+
+    def add_contact(self):
+        self + Information()
+        self.view = 'list'
+
+    def handle_choice(self):
+        if self.choice == 'q':
+            self.view = 'quit'
+        elif self.choice == 'a' and self.view == 'list':
+            self.view = 'add'
+        elif self.choice.isnumeric() and self.view == 'list':
+            index = int(self.choice) - 1
+            if index >= 0 and index < len(self.contact_list):
+                self.index = index
+                self.view = 'info'
+        elif self.choice == 'c' and self.view == 'info':
+            self.view = 'list'
+        elif self.choice == 'n' and self.view == 'info':
+            self.index = self.index + 1 if self.index + 1 < len(self.contact_list) else 0
+        elif self.choice == 'p' and self.view == 'info':
+            self.index = self.index - 1 if self.index - 1 >= 0 else len(self.contact_list) - 1
+
+
+class Information:
+    def __init__(self):
+        self.first_name = input('Enter their first name: ')
+        self.last_name = input('Enter their last name: ')
+        self.personal_phone = input('Enter their personal phone number: ')
+        self.personal_email = input('Enter their personal email address: ')
+        self.work_phone = input('Enter their work phone number: ')
+        self.work_email = input('Enter their work email address: ')
+        self.title = input('Enter their work title: ')
+
+    def display_info(self):
+        print(f'\n{self.first_name} {self.last_name}')
+        print(f'Personal phone number: {self.personal_phone}')
+        print(f'Personal email address: {self.personal_email}')
+        print(f'Work title: {self.title}')
+        print(f'Work phone number: {self.work_phone}')
+        print(f'Work email address: {self.work_email}')
+
+
+if __name__ == '__main__':
+    contacts = Contacts()
+    contacts.display()</code></pre>
+                <h4>Lab Question</h4>
+                <p>Look at the code below.</p>
+                <pre><code class="python">def product(self, a = None, b = None, c = None):
+    if a is not None and b is not None and c is not None:
+        return a + b + c
+    elif a is not None and b is not None:
+        return a + b
+    elif a is not None:
+        return a
+    else:
+        return 0</code></pre>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Method Overloading
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Method Overriding
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Operator Overloading
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Duck Typing
+                    </label>
+                </div>
+            </div>
+            <div id="polymorphism-lab-challenge">
+                <h3>5. Polymorphism Lab Challenge</h3>
+                <pre><code class="python">class Chef:
+    def __init__(self, name, cuisine, stars):
+        self.name = name
+        self.cuisine = cuisine
+        self.michelin_stars = stars
+
+    def __gt__(self, other_chef):
+        return self.michelin_stars > other_chef.michelin_stars
+
+    def __lt__(self, other_chef):
+        return self.michelin_stars < other_chef.michelin_stars
+
+    def compare(self, other_chef):
+        if self > other_chef:
+            return f'{self.name} has more Michelin stars than {other_chef.name}'
+        else:
+            return f'{other_chef.name} has more Michelin stars than {self.name}'
+
+
+if __name__ == '__main__':
+    marco = Chef('Marco Pierre White', 'French, British', 3)
+    rene = Chef('Rene Redzepi', 'Nordic', 2)
+    print(marco.compare(rene))
+    print(rene.compare(marco))</code></pre>
+            </div>
+            <div id="polymorphism-exercise-1">
+                <h3>1. Polymorphism Exercise 1</h3>
+                <p> Create the PowerBall class as a child class of Lottery. Override the shuffle method so that it returns a list of six random integers between 1 and 99.</p>
+                <pre><code class="python">import random
+
+class Lottery:
+    def shuffle(self):
+        results = []
+        for i in range(5):
+            results.append(random.randint(1, 20))
+        return results
+
+class PowerBall(Lottery):
+    def shuffle(self):
+        results = []
+        for i in range(6):
+            results.append(random.randint(1, 99))
+        return results
+
+if __name__ == '__main__':
+    powerBall = PowerBall()
+    print(powerBall.shuffle())</code></pre>
+            </div>
+            <div id="polymorphism-exercise-2">
+                <h3>2. Polymorphism Exercise 2</h3>
+                <p>Complete the Airplane and Train classes so that when an instance of each is passed to the passengers function, they will return the total number of passengers on board.</p>
+                <pre><code class="python">class Airplane:
+    def __init__(self, first_class, business_class, coach):
+        self.first_class = first_class
+        self.business_class = business_class
+        self.coach = coach
+
+    def total(self):
+        return self.first_class + self.business_class + self.coach
+
+class Train:
+    def __init__(self, car1, car2, car3, car4, car5):
+        self.car1 = car1
+        self.car2 = car2
+        self.car3 = car3
+        self.car4 = car4
+        self.car5 = car5
+
+    def total(self):
+        return self.car1 + self.car2 + self.car3 + self.car4 + self.car5
+
+def passengers(obj):
+    print(f'There are {obj.total()} passengers on board.')
+
+if __name__ == '__main__':
+    train = Train(10, 20, 30, 40, 50)
+    airplane = Airplane(10, 20, 30)
+
+    passengers(train)
+    passengers(airplane)</code></pre>
+            </div>
+            <div id="polymorphism-exercise-3">
+                <h3>3. Polymorphism Exercise 3</h3>
+                <p>Create the class Characters which has the attribute phrases which is a list of strings passed as a parameter. Overload the <, >, and == operators so that you can make comparisons based on the total number of characters in the string.</p>
+                <pre><code class="python">class Characters:
+    def __init__(self, phrases):
+        self.phrases = phrases
+
+    def total_characters(self):
+        total = 0
+        for phrase in self.phrases:
+            total += len(phrase)
+        return total
+
+    def __lt__(self, other):
+        return self.total_characters() < other.total_characters()
+
+    def __gt__(self, other):
+        return self.total_characters() > other.total_characters()
+
+    def __eq__(self, other):
+        return self.total_characters() == other.total_characters()
+
+if __name__ == '__main__':
+    sample_phrases1 = ['cat in the hat', 'green eggs and ham', 'the lorax']
+    sample_phrases2 = ['the taming of the shrew', 'hamlet', 'othello']
+
+    c1 = Characters(sample_phrases1)
+    c2 = Characters(sample_phrases2)
+    print(c1 > c2)  # prints 'True'
+    print(c1 < c2)  # prints 'False'
+    print(c1 == c1)  # prints 'True'</code></pre>
+            </div>
+            <div id="polymorphism-exercise-4">
+                <h3>4. Polymorphism Exercise 4</h3>
+                <p>Create the Median that has the method calculate_median that calculates the median of the integers passed to the method. Use method overloading so that this method can accept anywhere from two to five parameters.</p>
+                <pre><code class="python">class Median:
+    def calculate_median(self, n1, n2, n3=None, n4=None, n5=None):
+        if n3 is not None and n4 is not None and n5 is not None:
+            numbers = [n1, n2, n3, n4, n5]
+        elif n3 is not None and n4 is not None:
+            numbers = [n1, n2, n3, n4]
+        elif n3 is not None:
+            numbers = [n1, n2, n3]
+        else:
+            numbers = [n1, n2]
+
+        numbers.sort()
+        median_index = len(numbers) // 2
+        if len(numbers) % 2 == 0:
+            median = (numbers[median_index] + numbers[median_index - 1]) / 2
+        else:
+            median = numbers[median_index]
+        return median
+
+if __name__ == '__main__':
+    m = Median()
+    print(m.calculate_median(3, 5, 1, 4, 2))
+    print(m.calculate_median(8, 6, 4, 2))
+    print(m.calculate_median(9, 3, 7))
+    print(m.calculate_median(5, 2))</code></pre>
+            </div>
+            <div id="polymorphism-exercise-5">
+                <h3>5. Polymorphism Exercise 5</h3>
+                <p>Create a Substitute class that reads a text file and replaces every fifth word with the string HELLO.</p>
+                <pre><code class="python">source_file = '/home/codio/workspace/code/polymorphism/text_1_exercise5.txt'
+answer_file = '/home/codio/workspace/code/polymorphism/answer_exercise5.txt'
+
+class Substitute:
+    def __init__(self, source_file, answer_file):
+        self.source_file = source_file
+        self.answer_file = answer_file
+        self.words = None
+
+    def string_to_list(self):
+        '''Read text file, turn it into a
+        2D list of words for each line'''
+        words = []
+        with open(self.source_file, 'r') as file_object:
+            lines = file_object.read().split('\n')
+            for line in lines:
+                words.append(line.split())
+        self.words = words
+
+    def list_to_string(self):
+        '''Convert 2D list back into a
+        string with newline characters'''
+        lines = []
+        for line in self.words:
+            lines.append(' '.join(line))
+        string = '\n'.join(lines)
+        self.words = string
+
+    def swap_words(self):
+        self.string_to_list()
+        for line in self.words:
+            for i in range(len(line)):
+                if (i + 1) % 5 == 0:
+                    word = line[i]
+                    line[i] = 'HELLO'
+        self.list_to_string()
+
+class Stars(Substitute):
+    def swap_words(self):
+        self.string_to_list()
+        for line in self.words:
+            for i in range(len(line)):
+                if (i + 1) % 3 == 0:
+                    word = line[i]
+                    line[i] = '*' * len(word)
+        self.list_to_string()
+        file = open(self.answer_file, 'w')
+        file.writelines(self.words)
+        file.close()
+
+s = Stars(source_file, answer_file)
+s.swap_words()</code></pre>
+            </div>
+        </div>
+    </div>
+<div class = "navigation">
+    <div style='float: left;'><a href="unit-7.html" class="previous round">&#8249;</a></div>
+    <div style='float: right;'><a href="unit-9.html" class="next round">&#8250;</a></div>
+</div>
+</body>
+</html>

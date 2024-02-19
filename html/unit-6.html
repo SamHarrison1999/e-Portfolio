@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 6: Abstract Methods and Interfaces</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="unit-6">
+        <h1>Unit 6: Abstract Methods and Interfaces</h1>
+        <h2>Contents</h2>
+        <ul style="list-style-type:circle;">
+            <li><a href="#unit-6-objectives">Unit 6 Objectives</a></li>
+            <li><a href="#unit-6-reflection">Unit 6 Reflection</a></li>
+            <li><a href="#unit-6-codio-activities">Codio Activities</a>
+                <ul style="list-style-type:circle;">
+                    <li><a href="#what-is-encapsulation">What is encapsulation</a>
+                    <li><a href="#encapsulation-through-convention">Encapsulation through convention</a>
+                    <li><a href="#double-underscore">Double underscores</a>
+                    <li><a href="#encapsulation-formative-assessment">Formative Assessment</a>
+                    <li><a href="#getters-and-setters-with-methods">2. Getters and Setters with Methods</a>
+                    <li><a href="#getters-with-the-property-decorator">Getters with the Property Decorator</a>
+                    <li><a href="#setters-with-the-property-decorator">Setters with the Property Decorator</a>
+                    <li><a href="#getters-with-the-property-function">Getters and Setters with the Property Function</a>
+                    <li><a href="#getters-and-setters-formative-assessment">Getters and Setters Formative Assessment</a>
+                    <li><a href="#encapsulation-lab-1">Encapsulation Lab 1</a>
+                    <li><a href="#encapsulation-lab-2">Encapsulation Lab 2</a>
+                    <li><a href="#encapsulation-lab-3">Encapsulation Lab 3</a>
+                    <li><a href="#encapsulation-lab-4">Encapsulation Lab 4</a>
+                    <li><a href="#encapsulation-lab-challenge">Lab Challenge</a>
+                    <li><a href="#encapsulation-exercise-1">Encapsulation Exercise 1</a>
+                    <li><a href="#encapsulation-exercise-2">Encapsulation Exercise 2</a>
+                    <li><a href="#encapsulation-exercise-3">Encapsulation Exercise 3</a>
+                    <li><a href="#encapsulation-exercise-4">Encapsulation Exercise 4</a>
+                    <li><a href="#encapsulation-exercise-5">Encapsulation Exercise 5</a>
+                </ul>
+            </li>
+        </ul>
+        <div id="unit-6-objectives">
+            <h2>What we did in unit 6</h2>
+            <p>This unit focused on using abstract classes and interfaces in Python.</p>
+        </div>
+        <div id="unit-6-reflection">
+            <h2>Reflection on unit 6</h2>
+            <p>This unit gave me more practical experience of using interfaces and abstract classes in Python through the labs in Codio. I considered this to be beneficial as I only had a limited knowledge of interfaces. This unit was valuable to my learning because I believe you should always be striving to learn as much as possible. Additionally, the fact Python is one of the fastest growing programming languages having a better knowledge of it can only be considered a good thing. Lastly I belive whilst knowing the theory is important I believe you learn best by doing so getting more hands on experience allowed me to learn alot more effectively.</p>
+        </div>
+        <div id="unit-6-codio-activities">
+            <h2>Encapsulation</h2>
+            <div id="what-is-encapsulation">
+                <p>Encapsulation is a concept in which related data and methods are grouped together, and in which access to data is restricted.</p>
+                <h3>Public vs. Private</h3>
+                <p>Public means that the attribute or method can be accessed by an instance of a class. Private means that the attribute or method can only be accessed by the class itself. In Python, all methods and attributes are public by default. Python acknowledges private values in a unique way it uses a double underscore for name mangling and a single underscore as a convention for naming private values.</p>
+                <h3>Classes as encapsulation</h3>
+                <p>Class are a form of encapsulation in python as they are used to group together data and methods.</p>
+                <h4>Public Class</h4>
+                <pre><code class="python">class Phone:
+    def __init__(self, make, storage, megapixels):
+        self.make = make
+        self.storage = storage
+        self.megapixels = megapixels
+
+&gt;&gt;&gt; my_phone = Phone("iPhone", 256, 12)
+&gt;&gt;&gt; print(my_phone.storage)
+256
+&gt;&gt;&gt; my_phone.storage = 64
+&gt;&gt;&gt; print(my_phone.storage)
+64</code></pre>
+            <h3>Reading question</h3>
+                <p>Select the best definition of encapsulation from the choices below.</p>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Encapsulation occurs when you hide or restrict access to data.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Encapsulation occurs when you group together related data and methods, and when you hide or restrict access to data.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Encapsulation occurs when you group together related data and methods.
+                    </label>
+                </div>
+            </div>
+            <div id="encapsulation-through-convention">
+                <h3>Encapsulation through convention</h3>
+                <h4>Private Classes</h4>
+                <p>In Python, when programmers use a single underscore before an attribute or method name, there is an informal agreement to recognize that attribute or method as private.</p>
+                                <pre><code class="python">class Phone:
+    def __init__(self, make, storage, megapixels, carrier):
+        self._make = make
+        self._storage = storage
+        self._megapixels = megapixels
+        self._carrier = carrier
+
+&gt;&gt;&gt; my_phone = Phone("iPhone", 256, 12, "AT&T")
+&gt;&gt;&gt; print(my_phone.__dict__)
+{'_make': 'iPhone', '_storage': 256, '_megapixels': 12, '_carrier': 'AT&T'}</code></pre>
+                <p>Assume the following code:</p>
+                <pre><code class="python">class ExampleClass:
+    def __init__(self, attr1, attr2):
+        self.attr1 = attr1
+        self._attr2 = attr2</code></pre>
+                <p>Select all of the true statements about the instance variables attr1 and _attr2.</p>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Both attr1 and _attr2 are private instance variables.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        _attr2 is assumed to be a private instance variable.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Both attr1 and _attr2 are public instance variables.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        attr1 is public while _attr2 is private./
+                    </label>
+                </div>
+            </div>
+            <div id="double-underscore">
+                <h3>Double underscores</h3>
+                <p>Using two underscores, causes the Python interpreter to enforce changes. It is used to avoid name collisions in inheritance by changing the name to the format _ClassName__AttributeName.</p>
+                <p>When the Python interpreter encounters an attribute with a double underscore, it changes the name to _ClassName__AttributeName. This process is called mangling.</p>
+                <pre><code class="python">class PrivateClass:
+    def __init__(self):
+        self.__private_attribute = "I am a private attribute"
+
+    def helper_method(self):
+        return self.__private_method()
+
+    def __private_method(self):
+        return "I am a private method"
+
+obj = PrivateClass()
+print(obj.helper_method())</code></pre>
+                <h3>Reading Question</h3>
+                <p>Assume the following code:</p>
+                <pre><code class="python">class TestClass:
+    def __init__(self):
+        self._attr = 1
+        self.attr = 2
+        self.__attr = 3
+
+    def helper(self):
+        return self.__attr
+
+my_test = TestClass()</code></pre>
+                <p>Which command will print 3?</p>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        print(my_test.attr)
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        print(my_test._attr)
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        print(my_test.__attr)
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        print(my_test.helper())
+                    </label>
+                </div>
+            </div>
+            <div id="encapsulation-formative-assessment">
+                <h3>Formative Assessment</h3>
+            </div>
+            <div id="encapsulation-formative-assessment-1">
+                <p>Private means that an attribute or method can be accessed only from within the class.</p>
+                <p>Public means that an attribute or method can be accessed from within the class or outside of the class.</p>
+            </div>
+            <div id="encapsulation-formative-assessment-2">
+                <p>Select all of the code snippets that have “private” attributes.</p>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                            <pre><code class="python">class TestClass:
+    def __init__(self):
+        self.__attr = "I am an attribute"</code></pre>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                            <pre><code class="python">class TestClass:
+    def __init__(self):
+        self._attr = "I am an attribute"</code></pre>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                            <pre><code class="python">class TestClass:
+    def __init__(self):
+        self.attr = "I am an attribute"</code></pre>
+                    </label>
+                </div>
+            </div>
+            <div id="getters-and-setters-with-methods">
+                <h3>2. Getters and Setters with Methods</h3>
+                <p>Getters and setters are used to access and manipulate private attributes.</p>
+                <pre><code class="python">class Phone:
+    def __init__(self, model, storage, megapixels):
+        self._model = model
+        self._storage = storage
+        self._megapixels = megapixels
+
+    def get_model(self):
+        return self._model
+
+    def get_storage(self):
+        return self._storage
+
+    def get_megapixels(self):
+        return self._megapixels
+
+    def set_model(self, new_model):
+        self._model = new_model
+
+    def set_storage(self, new_storage):
+        self._storage = new_storage
+
+    def set_megapixels(self, new_megapixels):
+        self._megapixels = new_megapixels
+
+&gt;&gt;&gt; my_phone = Phone("iPhone", 256, 12)
+&gt;&gt;&gt; print(my_phone.get_model())
+iPhone
+&gt;&gt;&gt; my_phone.set_model("Galaxy S20")
+&gt;&gt;&gt; print(my_phone.get_model())
+Galaxy S20</code></pre>
+                <h3>Reading Question</h3>
+                <p>Look at the code snippets below and select all of the classes that have a getter method.</p>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                            <pre><code class="python">class Dog:
+    def __init__(self, breed):
+        self._breed = breed
+
+    def get_breed(self):
+        return self._breed</code></pre>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                            <pre><code class="python">class Guitar:
+    def __init__(self, brand):
+        self._brand = brand
+
+    def retrieve_brand(self):
+        return self._brand</code></pre>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                            <pre><code class="python">class Cake:
+    def __init__(self, frosting):
+        self._frosting = frosting
+
+    def set_frosting(self, new_frosting):
+        self._frosting = new_frosting</code></pre>
+                    </label>
+                </div>
+            </div>
+            <div id="getters-with-the-property-decorator">
+                <h3>Getters with the Property Decorator</h3>
+                <p>The property object in Python allows you to write code as if all the attributes are public. The property class is used to write getters and setters in a pythonic way. The property class can be implemented either with the property decorator or with the property function.</p>
+                <pre><code class="python">class Person:
+    def __init__(self, name, age):
+        self._name = name
+        self._age = age
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def age(self):
+        return self._age
+
+&gt;&gt;&gt; c = Person("Calvin", 6)
+&gt;&gt;&gt; print(c.name)
+Calvin
+&gt;&gt;&gt; print(c.age)
+6</code></pre>
+                <h4>Reading Question</h4>
+                <p>What is a getter method?</p>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        A getter method is a method that accesses (gets) the value of an instance variable.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        A getter is another name for an instance method.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        A getter method modifies (sets) the value of an instance variable.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        A getter method is any method that starts with get_. For example, get_name or get_age.
+                    </label>
+                </div>
+            </div>
+            <div id="setters-with-the-property-decorator">
+                <h3>Setters with the Property Decorator</h3>
+                <p>The setter decorator starts with a @ followed by the name of the getter method, and it ends with .setter</p>
+                <p>The parameters for a setter function are self and the new value.</p>
+                <pre><code class="python">class Person:
+    def __init__(self, name, age):
+        self._name = name
+        self._age = age
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, new_name):
+        if type(new_name) != str:
+            raise TypeError("Names must be expressed as a string")
+        self._name = new_name
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, new_age):
+        if new_age < 0:
+            raise ValueError("Age can not be less than 0")
+        self._age = new_age
+
+&gt;&gt;&gt; c = Person("Calvin", "6")
+&gt;&gt;&gt; print(c.name)
+Calvin
+&gt;&gt;&gt; print(c.age)
+6
+&gt;&gt;&gt; c.age = 30
+&gt;&gt;&gt; c.name = "Peter"
+&gt;&gt;&gt; print(c.name)
+Peter
+&gt;&gt;&gt; print(c.age)
+30
+&gt;&gt;&gt; c.age = -17
+ValueError: Age can not be less than 0
+&gt;&gt;&gt; c.name = False
+TypeError: Names must be expressed as a string
+print(c.name)
+print(c.age)
+</code></pre>
+                <h4>Reading question</h4>
+                <p>Assume the following code:</p>
+                <pre><code class="python">class TestClass:
+    def __init__(self):
+        self._private = "I am private"
+
+    @property
+    def private(self):
+        return self._private</code></pre>
+                <p>Which code snippet below would be the setter for TestClass?</p>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                            <pre><code class="python">@property.setter
+def private(self, new_value):
+    self._private = new_value</code></pre>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                            <pre><code class="python">@_private.setter
+def private(self, new_value):
+    self._private = new_value</code></pre>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                            <pre><code class="python">@private.setter
+def private(self, new_value):
+    self._private = new_value</code></pre>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                            <pre><code class="python">@setter.private
+def private(self, new_value):
+    self._private = new_value</code></pre>
+                    </label>
+                </div>
+            </div>
+            <div id="getters-with-the-property-function">
+                <h3>Getters and Setters with the Property Function</h3>
+                <pre><code class="python">class Person:
+  def __init__(self, name, age):
+    self._name = name
+    self._age = age
+
+  def get_name(self):
+    return self._name
+
+  def set_name(self, new_name):
+    self._name = new_name
+
+  def get_age(self):
+    return self._age
+
+  def set_age(self, new_age):
+    self._age = new_age
+
+  name = property(get_name, set_name)
+  age = property(get_age, set_age)
+
+c = Person("Calvin", 6)
+print(c.name)
+print(c.age)
+c.name = "Hobbes"
+c.age = 8
+print(c.name)
+print(c.age)</code></pre>
+                <h4>Reading Question</h4>
+                <p>Assume the following code:</p>
+                <pre><code class="python">class TestClass:
+    def __init__(self):
+        self._color = "red"
+
+    def get_color(self):
+        return self._color
+
+    def set_color(self, new_color):
+        self._color = new_color
+
+    color = property(set_color, get_color)</code></pre>
+                <p>Why is this code incorrect?</p>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        The order of the getter and setter in color = property(set_color, get_color) are reversed.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        There is nothing wrong with the code.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        The @property decorator is missing.
+                    </label>
+                </div>
+            </div>
+            <div id="getters-and-setters-formative-assessment">
+                <h3>Getters and Setters Formative Assessment</h3>
+            </div>
+            <div id="getters-and-setters-formative-assessment-1">
+                <p>Fill in the blanks below.</p>
+                <p>A getter accesses the value of a private instance variable.<br>A setter mutates the value of a private instance variable.</p>
+            </div>
+            <div id="getters-and-setters-formative-assessment-2">
+                <p>Assume the class PrimaryColors as defined below:</p>
+                <pre><code class="python">class PrimaryColor:
+    """Primary colors are red, blue, and yellow"""
+    def __init__(self):
+        self._color = "red"
+
+    @property
+    def color(self):
+        """Getter that returns the _color instance variable"""
+        return self._color</code></pre>
+                <p>Drag the code blocks into the box below to create a setter that validates if the new color is a primary color. If not, raise an exception.</p>
+                <pre><code class="python">@color.setter
+def color(self, new_color):
+    primary_colors = ["red", "blue", "yellow"]
+    if new_color not in primary_colors:
+        raise ValueError("New color must be a primary color")
+    self._color = new_color</code></pre>
+            </div>
+            <div id="encapsulation-lab-1">
+                <h3>Encapsulation Lab 1</h3>
+                <pre><code class="python">import csv
+
+# **********************************************
+# code for the coffee object
+# **********************************************
+
+class CoffeeJournal:
+  def __init__(self, file):
+    self._file = file
+    self._roaster = ""
+    self._country = ""
+    self._region = ""
+    self._stars = ""
+    self._old_coffee = self.load_coffee()
+    self._new_coffee = []
+
+  def load_coffee(self):
+    coffee = []
+    with open(self._file) as f:
+      reader = csv.reader(f, delimiter=',')
+      for row in reader:
+        coffee.append(row)
+    return coffee
+
+# **********************************************
+# code for testing your script
+# **********************************************
+
+test_object = CoffeeJournal("code/encapsulation/test_journal1.csv")
+test_object.load_coffee()
+print(test_object._old_coffee)</code></pre>
+                <h4>Lab Question</h4>
+                <p>Fill in the blanks with the attr, _attr, and __attr.</p>
+                <p>__attr acts like a private attribute because it cannot be easily accessed outside of the class. This naming scheme is used for name mangling.</p>
+                <p>attr is a public attribute that can be accessed both inside and outside of the class.</p>
+                <p>_attr is a convention by which Python programmers assume the attribute is private.</p>
+            </div>
+            <div id="encapsulation-lab-2">
+                <h3>Encapsulation Lab 2</h3>
+                <p>Write the setters and getters for the coffee journal class</p>
+                <pre><code class="python">@property
+def roaster(self):
+    return self._roaster
+
+@roaster.setter
+def roaster(self, new_roaster):
+    self._roaster = new_roaster
+
+@property
+def country(self):
+    return self._country
+
+@country.setter
+def country(self, new_country):
+    self._country = new_country
+
+@property
+def region(self):
+    return self._region
+
+@region.setter
+def region(self, new_region):
+    self._region = new_region
+
+@property
+def stars(self):
+    return self._stars
+
+@stars.setter
+def stars(self, new_stars):
+    self._stars = new_stars
+</code></pre>
+                <h4>Testing the getters and setters</h4>
+                <pre><code class="python"># **********************************************
+# code for testing your script
+# **********************************************
+
+test_object = CoffeeJournal("code/encapsulation/test_journal2.csv")
+test_object.roaster = "Peace River"
+test_object.country = "Rawanda"
+test_object.region = "Remera"
+test_object.stars = "***"
+print(test_object.roaster)
+print(test_object.country)
+print(test_object.region)
+print(test_object.stars)
+</code></pre>
+                <h3>Lab Question</h3>
+                <p>Predict the output of the following code:</p>
+                <pre><code class="python">class TestClass:
+  def __init__(self, color):
+    self._color = color
+
+my_object = TestClass("red")
+my_object.color = "blue"
+print(my_object.color)</code></pre>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Error message, _color is a private attribute
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        blue
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        red
+                    </label>
+                </div>
+            </div>
+            <div id="encapsulation-lab-3">
+                <h3>Encapsulation Lab 3</h3>
+                <p>Finish off the coffee journal class with the add coffee, save and show coffee methods.</p>
+                <pre><code class="python"># inside CoffeeJournal class
+def add_coffee(self):
+    self._new_coffee.append([self._roaster, self._country, self._region, self._stars])
+
+def save(self):
+    with open(self._file, 'a') as f:
+        writer = csv.writer(f)
+        writer.writerows(self._new_coffee)
+
+def show_coffee(self):
+    print()
+    # if there is no information on any coffee, tell the user to add one
+    if len(self._old_coffee) < 2 and len(self._new_coffee) == 0:
+        print("Enter a coffee first")
+    # if there is information in the CSV but not new coffee print the old coffee
+    elif len(self._old_coffee) > 2 and len(self._new_coffee) == 0:
+        for row in self._old_coffee:
+            print(f"{row[0]:13} {row[1]:13} {row[2]:13}  {row[3]:13}")
+    # print both the old coffee and the new coffee
+    else:
+        for row in self._old_coffee:
+            print(f"{row[0]:13} {row[1]:13} {row[2]:13}  {row[3]:13}")
+        for row in self._new_coffee:
+            print(f"{row[0]:13} {row[1]:13} {row[2]:13}  {row[3]:13}")
+    print()</code></pre>
+                <h4>Lab Question</h4>
+                <p>Look at Code A and Code B and then select all of the choices that are true</p>
+                <h5>Code A</h5>
+                <pre><code class="python">class Person:
+    def __init__(self, name):
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, new_name):
+        self._name = new_name</code></pre>
+                <h5>Code B</h5>
+                <pre><code class="python">class Person:
+    def __init__(self, name):
+        self._name = name
+
+    def get_name(self):
+        return self._name
+
+    def set_name(self, new_name):
+        self._name = new_name
+
+    name = property(get_name, set_name)</code></pre>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Code A uses the property decorator.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Code B uses the property function.
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Both Code A and Code B do exactly the same thing.
+                    </label>
+                </div>
+            </div>
+            <div id="encapsulation-lab-4">
+                <h3> Encapsulation Lab 4</h3>
+                <p>Create the CLI for the coffee journal application</p>
+                <pre><code class="python"># **********************************************
+# code for the command line application
+# **********************************************
+
+def main_menu():
+    print("Coffess of the World")
+    print("\t1. Show Coffee")
+    print("\t2. Add Coffee")
+    print("\t3. Save and Quit")
+    choice = int(input("Enter the number of your selection: "))
+    return choice
+
+def perform_action(choice, coffee):
+    if choice == 1:
+        coffee.show_coffee()
+    elif choice == 2:
+        enter_coffee(coffee)
+    elif choice == 3:
+        quit(coffee)
+
+def enter_coffee(coffee):
+    print()
+    coffee.roaster = input("Enter the name of the roaster: ")
+    coffee.country = input("Enter the country of origin: ")
+    coffee.region = input("Enter the region: ")
+    coffee.stars = input("Enter the number of stars '*' (1-4): ")
+    print()
+    coffee.add_coffee()
+
+def quit(coffee):
+    global run_loop
+    coffee.save()
+    run_loop = False
+
+# **********************************************
+# code for testing your script
+# **********************************************
+
+run_loop = True
+file = "code/encapsulation/coffee_journal.csv"
+my_coffee = CoffeeJournal(file)
+
+while run_loop:
+    choice = main_menu()
+    perform_action(choice, my_coffee)</code></pre>
+                <h4>Lab Question</h4>
+                <p>What is the output of the code below?</p>
+                <pre><code class="python">class Person:
+    def __init__(self, name):
+        self._name = name
+
+    def get_name(self):
+        return self._name
+
+    def set_name(self, new_name):
+        self._name = new_name
+
+    name = property(set_name, get_name)
+
+my_person = Person("Marie")
+print(my_person.name)</code></pre>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Marie
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" disabled readonly/>
+                        Error message - the attribute name is not defined
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" checked disabled readonly/>
+                        Error message - the getter should come before the setter in the property function
+                    </label>
+                </div>
+            </div>
+            <div id="encapsulation-lab-challenge">
+                <h3>Lab Challenge</h3>
+                <ul style="list-style-type:circle;">
+                    <li>Write a class named Person that has attributes for name, age, and occupation.</li>
+                    <li>Write getters and setters for each attribute without using the property decorator</li>
+                </ul>
+                <pre><code class="python">class Person:
+    def __init__(self, name, age, occupation):
+        self._name = name
+        self._age = age
+        self._occupation = occupation
+
+    def get_name(self):
+        return self._name
+
+    def set_name(self, new_name):
+        self._name = new_name
+
+    def get_age(self):
+        return self._age
+
+    def set_age(self, new_age):
+        self._age = new_age
+
+    def get_occupation(self):
+        return self._occupation
+
+    def set_occupation(self, new_occupation):
+        self._occupation = new_occupation
+
+
+&gt;&gt;&gt; my_person = Person("Citra Curie", 16, "student")
+&gt;&gt;&gt; print(my_person.get_name())
+Citra Curie
+&gt;&gt;&gt; my_person.set_name("Rowan Faraday")
+&gt;&gt;&gt; print(my_person.get_name())
+Rowan Faraday
+&gt;&gt;&gt; print(my_person.get_age())
+16
+&gt;&gt;&gt; my_person.set_age(18)
+&gt;&gt;&gt; print(my_person.get_age())
+18
+&gt;&gt;&gt; print(my_person.get_occupation())
+student
+&gt;&gt;&gt; my_person.set_occupation("plumber")
+&gt;&gt;&gt; print(my_person.get_occupation())
+plumber</code></pre>
+            </div>
+            <div id="encapsulation-exercise-1">
+                <h3>Encapsulation Exercise 1</h3>
+                <p>Define the Country class which has attributes for name, capital, population, and continent</p>
+                <pre><code class="python">class Country:
+    def __init__(self, name: str, capital: str, population: int, continent: str) -> None:
+        self._name = name
+        self._capital = capital
+        self._population = population
+        self._continent = continent</code></pre>
+            </div>
+            <div id="encapsulation-exercise-2">
+                <h3>Encapsulation Exercise 2</h3>
+                <p>Define the Artist class which has attributes for name, medium, style, and famous_artwork</p>
+                <pre><code class="python">class Artist:
+
+    def __init__(self, name: str, medium: str, style: str, famous_artwork: str) -> None:
+        self.name = name
+        self.medium = medium
+        self.style = style
+        self.famous_artwork = famous_artwork</code></pre>
+            </div>
+            <div id="encapsulation-exercise-3">
+                <h3>Encapsulation Exercise 3</h3>
+                <p>Define the BankAccount class which has attributes for checking and savings.</p>
+                <pre><code class="python">class BankAccount():
+    def __init__(self, checking=0, savings=0) -> None:
+        self._checking = checking
+        self._savings = savings
+
+    def get_checking(self) -> float:
+        return self._checking
+
+    def set_checking(self, checking: float) -> None:
+        self._checking = checking
+
+    def get_savings(self) -> float:
+        return self._savings
+
+    def set_savings(self, savings: float) -> None:
+        self._savings = savings</code></pre>
+            </div>
+            <div id="encapsulation-exercise-4">
+                <h3>Encapsulation Exercise 4</h3>
+                <p>Define the Dancer class which has attributes for name, nationality, and style</p>
+                <pre><code class="python">class Dancer:
+    def __init__(self, name: str, nationality: str, style: str) -> None:
+        self._name = name
+        self._nationality = nationality
+        self._style = style
+
+    @property
+    def name(self) -> str:
+        return self._name
+
+    @name.setter
+    def name(self, name: str) -> None:
+        self._name = name
+
+    @property
+    def nationality(self) -> str:
+        return self._nationality
+
+    @nationality.setter
+    def nationality(self, nationality: str) -> None:
+        self._nationality = nationality
+
+    @property
+    def style(self) -> str:
+        return self._style
+
+    @style.setter
+    def style(self, style: str) -> None:
+        self._style = style</code></pre>
+            </div>
+            <div id="encapsulation-exercise-5">
+                <h3>Encapsulation Exercise 5</h3>
+                <p>Define the Cyclist class which has attributes name, nationality, and nickname</p>
+                <pre><code class="python">class Cyclist:
+    def __init__(self, name: str, nationality: str, nickname: str) -> None:
+        self._name = name
+        self._nationality = nationality
+        self._nickname = nickname
+
+    @property
+    def name(self) -> str:
+        return self._name
+
+    @name.setter
+    def name(self, name: str) -> None:
+        self._name = name
+
+    @property
+    def nationality(self) -> str:
+        return self._nationality
+
+    @nationality.setter
+    def nationality(self, nationality: str) -> None:
+        self._nationality = nationality
+
+    @property
+    def nickname(self) -> str:
+        return self._nickname
+
+    @nickname.setter
+    def nickname(self, nickname: str) -> None:
+        self._nickname = nickname</code></pre>
+            </div>
+        </div>
+    </div>
+<div class = "navigation">
+    <div style='float: left;'><a href="unit-5.html" class="previous round">&#8249;</a></div>
+    <div style='float: right;'><a href="unit-7.html" class="next round">&#8250;</a></div>
+</div>
+</body>
+</html>

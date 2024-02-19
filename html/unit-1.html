@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unit 1: An Introduction to Python Programming and the OO Programming Paradigm</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="unit-1">
+    <h1>Unit 1: An Introduction to Python Programming and the OO Programming Paradigm</h1>
+    <h2>Contents</h2>
+    <ul style="list-style-type:circle;">
+        <li><a href="#unit-1-objectives">Unit 1 Objectives</a></li>
+        <li><a href="#unit-1-reflection">Unit 1 Reflection</a></li>
+        <li><a href="#benefits-of-oop">Benefits of OOP</a></li>
+        <li><a href="#pillars-of-oop">Pillars of OOP</a></li>
+        <li><a href="#classes-in-python">Creating a class in Python</a></li>
+        <li><a href="#data-types-in-python">Data Types in Python</a></li>
+        <li><a href="#access-modifiers-in-python">Access Modifiers in Python</a></li>
+        <li><a href="#unit-1-codio-activity">Codio Activities</a>
+            <ul style="list-style-type:circle;">
+                <li><a href="#15.1-programmer-defined-types">15.1 Programmer-defined types</a>
+                <li><a href="#15.2-attributes">15.2 Attributes</a>
+                <li><a href="#15.3-rectangles">15.3 Rectangles</a>
+                <li><a href="#15.4-instances-as-return-values">15.4 Instances as return values</a>
+                <li><a href="#15.5-objects-are-mutable">15.5 Objects are mutable</a>
+                <li><a href="#15.6-copying">15.6 Copying</a>
+                <li><a href="#15.7-debugging">15.7 Debugging</a>
+                <li><a href="#exercise-15.1">Exercise 15.1</a>
+                <li><a href="#exercise-15.2">Exercise 15.2</a>
+                <li><a href="#classes-and-objects-tutorial-lab-1">Lab 1: Creating a Class</a>
+                <li><a href="#classes-and-objects-tutorial-lab-2">Lab 2: Instantiate a Class</a>
+                <li><a href="#classes-and-objects-tutorial-lab-3">Lab 3: Modify Instance Data Members</a>
+                <li><a href="#classes-and-objects-challenge">Lab Challenge</a>
+                <li><a href="#classes-and-objects-self-check-questions">Self-Check Questions</a>
+            </ul>
+        </li>
+        <li><a href="#collaborative-discussion-one">Collaborative Discussion</a></li>
+        <li><a href="#unit-1-e-portfolio-activities">E-portfolio Activities</a></li>
+    </ul>
+    <div id="unit-1-objectives">
+        <h2>What we did in unit 1</h2>
+        <p>First we looked at the different datatypes available in Python, then we delved into what object-oriented programming is looking in depth at abstraction, encapsulation, inheritance, and polymorphism. Then we learned how Python supports object-oriented programming through user-defined classes.</p>
+    </div>
+    <div id="unit-1-reflection">
+        <h2>Reflection on unit 1</h2>
+        <p>As I had previously completed a module on object-oriented programming as part of my undergraduate degree, I already knew about the majority of the content covered in this unit. My experience with object-oriented programming before this had centered mainly around Java, so it was interesting to learn more about how Python differs from Java. As computer science is a constantly evolving field, learning other programming languages can only be considered advantageous as it will help to make me a more well-rounded developer and it opens up potential career opportunities that I hadn't previously considered.</p>
+    </div>
+    <div id="benefits-of-oop">
+        <h2>Benefits of OOP</h2>
+        <ul style="list-style-type:circle;">
+            <li>Shorter methods</li>
+            <li>Supports public and private properties</li>
+            <li>Loose coupling</li>
+            <li>Supports code development distribution between developers</li>
+            <li>Improved maintainability</li>
+            <li>More sustainable</li>
+            <li>Reusability</li>
+        </ul>
+    </div>
+    <div id="pillars-of-oop">
+        <h2>Four pillars of object-oriented programming</h2>
+        <ul style="list-style-type:circle;">
+            <li>Abstraction
+                <ul style="list-style-type:circle;">
+                    <li>Abstraction allows you to hide an objects' complexity showing only the necessary features of an object.</li>
+                </ul>
+            </li>
+            <li>Encapsulation
+                <ul style="list-style-type:circle;">
+                    <li>Encapsulation is the process of dividing the code into a public interface and a private implementation of that interface.</li>
+                </ul>
+            </li>
+            <li>Inheritance
+                <ul style="list-style-type:circle;">
+                    <li>Inheritance allows you to reuse code by extending a class. The child classes contain all the attributes and methods of their parent class.</li>
+                </ul>
+            </li>
+            <li>Polymorphism
+                <ul style="list-style-type:circle;">
+                    <li>An example of polymorphism is overloading methods so they work with different data types</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="classes-in-python">
+        <h2>Defining a class in Python</h2>
+        <p>The syntax for declaring a class in python is the class keyword followed by the class name followed by a colon. A class can be thought of as a blueprint for an object. The code below shows a simple person class.</p>
+        <pre><code class="python">class Person:
+    """
+    Represents a person
+    attributes: forename, surname
+    """</code></pre>
+    </div>
+    <div id="data-types-in-python">
+        <h2>Data Types in Python</h2>
+        <ul style="list-style-type:circle;">
+            <li>Text Type
+                <ul style="list-style-type:circle;">
+                    <li>str</li>
+                </ul>
+            </li>
+            <li>Numeric Types
+                <ul style="list-style-type:circle;">
+                    <li>int</li>
+                    <li>float</li>
+                    <li>complex</li>
+                </ul>
+            </li>
+            <li>Sequence Types
+                <ul style="list-style-type:circle;">
+                    <li>list</li>
+                    <li>tuple</li>
+                    <li>range</li>
+                </ul>
+            </li>
+            <li>Mapping Type
+                <ul style="list-style-type:circle;">
+                    <li>dict</li>
+                </ul>
+            </li>
+            <li>Set Types
+                <ul style="list-style-type:circle;">
+                    <li>set</li>
+                    <li>frozenset</li>
+                </ul>
+            </li>
+            <li>Boolean Type
+                <ul style="list-style-type:circle;">
+                    <li>bool</li>
+                </ul>
+            </li>
+            <li>Binary Types
+                <ul style="list-style-type:circle;">
+                    <li>bytes</li>
+                    <li>bytearray</li>
+                    <li>memoryview</li>
+                </ul>
+            </li>
+            <li>None Type
+                <ul style="list-style-type:circle;">
+                    <li>NoneType</li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+    <div id="access-modifiers-in-python">
+        <h2>Access modifiers in python classes</h2>
+        <ul style="list-style-type:circle;">
+            <li>Public
+                <ul style="list-style-type:circle;">
+                    <li>Anything that is public can be accessed from anywhere in your application.</li>
+                    <li>By default, in Python, all attributes and methods of a class are public.</li>
+                </ul>
+            </li>
+            <li>Private
+                <ul style="list-style-type:circle;">
+                    <li>Anything that is private is only accessible within the class.</li>
+                    <li>Python's convention for naming private variables and methods is a single underscore at the start of the method or variable.</li>
+                    <li><strong>This is only a convention as Python doesn't really recognise private variables and methods.</strong></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="unit-1-public-class-example">
+            <p>The code block below is an example of a public class with public attributes and a public method.</p>
+            <pre><code class="python">class Person:
+    """
+    Represents a person
+    attributes: forename, surname
+    """
+    def __init__(self, forename: str, surname: str) -> None:
+        # Public attributes
+        self.forename = forename
+        self.surname = surname
+
+    # Public method
+    def name(self) -> str:
+        """Return a persons first name and last name"""
+        return self.forename + " " + self.surname
+
+&gt;&gt;&gt; person = Person("Homer", "Simpson")
+&gt;&gt;&gt; print(person.forename + " " + person.surname)
+Homer Simpson
+&gt;&gt;&gt; print(person.name())
+Homer Simpson</code></pre>
+        </div>
+        <div class="unit-1-private-class-example">
+            <p>The code block below is an example of a private class</p>
+            <pre><code class="python">class Person:
+    """
+    Represents a person
+    attributes: forename, surname
+    """
+    def __init__(self, forename, surname):
+        # Private attributes
+        self._forename = forename
+        self._surname = surname
+
+    def getForename(self):
+        """Return a persons first name"""
+        return self._forename
+
+    def getSurname(self):
+        """Return a persons last name"""
+        return self._surname
+
+
+&gt;&gt;&gt; person = Person("Homer", "Simpson")
+&gt;&gt;&gt; print(person.getForename() + " " + person.getSurname())
+Homer Simpson</code></pre>
+        </div>
+    </div>
+    <div id="unit-1-codio-activity">
+        <h2>Unit 1 Codio Activities</h2>
+        <h3>Classes and objects</h3>
+        <div id="15.1-programmer-defined-types">
+            <h3>15.1 Programmer-defined types</h3>
+            <h4>Point Class</h4>
+            <p>A point object is an instance of the point class that represents a point in two-dimensional space.<br>A point object has an x and y value representing the points x and y coordinates.</p>
+            <p>Possible ways of storing a points coordinates in Python:</p>
+            <ul style="list-style-type:circle;">
+                <li>Store the x and y coordinates in two separate variables</li>
+                <li>Store the x and y coordinates in a tuple</li>
+                <li>Store the x and y coordinates in a list</li>
+                <li>Store the x and y coordinates in a class</li>
+            </ul>
+            <p>Below is the class definition for the point class.</p>
+            <pre><code class="python">class Point -> None:
+    """Represents a point in 2-D space."""
+
+&gt;&gt;&gt; blank = Point()
+&gt;&gt;&gt; print(blank)
+&lt;__main__.Point object at 0xb7e9d3ac&gt;</code></pre>
+            <p>When you print an instance of a class, Python tells you what class it belongs to and where it is stored in memory.</p>
+        </div>
+        <div id="15.2-attributes">
+            <h3>15.2 Attributes</h3>
+            <h4>Setting the value of an attribute</h4>
+            <p>You can assign values to attributes using the dot notation.</p>
+            <pre><code class="python">&gt;&gt;&gt; blank.x = 3.0
+&gt;&gt;&gt; blank.y = 4.0</code></pre>
+            <h4>Reading the value of an attribute</h4>
+            <p>You can read the value of an attribute for an instance using the dot notation.</p>
+            <pre><code class="python">&gt;&gt;&gt; blank.y
+4.0
+&gt;&gt;&gt; x = blank.x
+&gt;&gt;&gt; x
+3.0</code></pre>
+            <p>blank.x returns the value of the x attribute for the blank object.<br>blank.y returns the value of the y attribute for the blank object.</p>
+            <h4>Using the dot notation as part of an expression</h4>
+            <pre><code class="python">&gt;&gt;&gt; '(%g, %g)' % (blank.x, blank.y)
+'(3.0, 4.0)'
+&gt;&gt;&gt; distance = math.sqrt(blank.x**2 + blank.y**2)
+&gt;&gt;&gt; distance
+5.0</code></pre>
+            <h4>Passing an instance as an argument</h4>
+            <pre><code class="python">def print_point(p: point) -> None:
+    """print the x and y coordinates for a point"""
+    print('(%g, %g)' % (p.x, p.y))
+
+&gt;&gt;&gt; print_point(blank)
+(3.0, 4.0)</code></pre>
+            <p>In the code above p is an alias representing a point object.</p>
+            <h4>Exercise</h4>
+            <p>As an exercise, write a function called distance_between_points that takes two Points as arguments and returns the distance between them.</p>
+            <pre><code class="python">def distance_between_points(p1: Point, p2: point) -> int:
+    """Calculate the difference between 2 points using each points x and y coordinates"""
+    dx = p1.x - p2.x
+    dy = p1.y - p2.y
+    dist = math.sqrt(dx ** 2 + dy ** 2)
+    return dist</code></pre>
+        </div>
+        <div id="15.3-rectangles">
+            <h3>15.3 Rectangles</h3>
+            <h4>Rectangle Class</h4>
+            <p>The rectangle class assumes a rectangle is either vertical or horizontal.</p>
+            <pre><code class="python">class Rectangle -> None:
+    """
+    Represents a rectangle.
+    attributes: width: int, height: int, corner: Point.
+    """
+
+&gt;&gt;&gt; box = Rectangle()
+&gt;&gt;&gt; box.width = 100.0
+&gt;&gt;&gt; box.height = 200.0
+&gt;&gt;&gt; box.corner = Point()
+&gt;&gt;&gt; box.corner.x = 0.0
+&gt;&gt;&gt; box.corner.y = 0.0</code></pre>
+        </div>
+        <div id="15.4-instances-as-return-values">
+            <h3>15.4 Instances as return values</h3>
+            <p>A function can also return an instance of an object as can be seen from the find center function below.</p>
+            <pre><code class="python">def find_center(rect: Rectangle) -> Point:
+    """Find the x and y coordinates for the center of a rectangle"""
+    p = Point()
+    p.x = rect.corner.x + rect.width/2
+    p.y = rect.corner.y + rect.height/2
+    return p
+
+&gt;&gt;&gt; center = find_center(box)
+&gt;&gt;&gt; print_point(center)
+(50, 100)</code></pre>
+        </div>
+        <div id="15.5-objects-are-mutable">
+            <h3>15.5 Objects are mutable</h3>
+            <p>You can update an objects attributes either by assigning it a new value or through a function</p>
+            <h4>Changing the size of a rectangle without changing its position</h4>
+            <pre><code class="python">def grow_rectangle(rect: Rectangle, width: int, height: int) -> None:
+    """Increase the width and height of the rectangle"""
+    rect.width += width
+    rect.height += height
+
+&gt;&gt;&gt; box.width, box.height
+(100.0, 200.0)
+&gt;&gt;&gt; # Increasing an attribute by assigning a new value
+&gt;&gt;&gt; box.width += 50
+&gt;&gt;&gt; box.height += 100
+&gt;&gt;&gt; box.width, box.height
+(150.0, 300.0)
+&gt;&gt;&gt; # Increasing an attribute using a function
+&gt;&gt;&gt; grow_rectangle(box, 50, 100)
+&gt;&gt;&gt; box.width, box.height
+(200.0, 400.0)</code></pre>
+            <h4>Exercise</h4>
+            <p>As an exercise, write a function named move_rectangle that takes a rectangle and two numbers named dx and dy. It should change the location of the rectangle by adding dx to the x coordinate of a corner and adding dy to the y coordinate of a corner.</p>
+            <pre><code class="python">def move_rectangle(rect: Rectangle, dx: int, dy: int) -> None:
+    """Change the location of the rectangle"""
+    rect.corner.x += dx
+    rect.corner.y += dy</code></pre>
+        </div>
+        <div id="15.6-copying">
+            <h3>15.6 Copying</h3>
+            <p>Copying an object ensures changes to an object in one place don't have unintended consequences in another place. <strong>A copy of an object is not the same object. You need to perform a deep copy to copy embedded objects.</strong></p>
+            <pre><code class="python">&gt;&gt;&gt; p1 = Point()
+&gt;&gt;&gt; p1.x = 3.0
+&gt;&gt;&gt; p1.y = 4.0
+&gt;&gt;&gt; import copy
+&gt;&gt;&gt; p2 = copy.copy(p1)
+&gt;&gt;&gt; print_point(p1)
+(3, 4)
+&gt;&gt;&gt; print_point(p2)
+(3, 4)
+&gt;&gt;&gt; p1 is p2
+False
+&gt;&gt;&gt; p1 == p2
+False
+&gt;&gt;&gt; box2 = copy.copy(box)
+&gt;&gt;&gt; box2 is box
+False
+&gt;&gt;&gt; box2.corner is box.corner
+True
+&gt;&gt;&gt; box3 = copy.deepcopy(box) # box and box3 are completely separate objects
+&gt;&gt;&gt; box3 is box
+False
+&gt;&gt;&gt; box3.corner is box.corner
+False</code></pre>
+            <h4>Exercise</h4>
+            <p>As an exercise, write a version of move_rectangle that creates and returns a new Rectangle instead of modifying the old one.</p>
+            <pre><code class="python">def move_rectangle(rect: Rectangle, dx: int, dy: int) -> Rectangle:
+    """Move a rectangle using the deep copy function"""
+    new = copy.deepcopy(rect)
+    new.corner.x += dx
+    new.corner.y += dy
+    return new</code></pre>
+        </div>
+        <div id="15.7-debugging">
+            <h3>15.7 Debugging</h3>
+            <pre><code class="python"># Useful debugging functions
+&gt;&gt;&gt; isinstance(p, Point)
+True
+&gt;&gt;&gt; hasattr(p, 'z')
+False
+&gt;&gt;&gt; type(p)
+&lt;class '__main__.Point'&gt;</code></pre>
+        </div>
+        <div id="exercise-15.1">
+            <h3>Exercise 15.1</h3>
+            <ul style="list-style-type:circle;">
+                <li>Create a circle class with the attribute's center and radius, where center is a point object and radius is a number.</li>
+                <li>Create a Circle object with its center at (150,100) and radius 75.</li>
+                <li>Write a function named point_in_circle that takes a circle and a point and returns true if the point lies in the circle or is on the boundary of the circle.</li>
+                <li>Write a function named rect_in_circle that takes a circle and a rectangle and returns true if the rectangle lies entirely in the circle or on the boundary of the circle.</li>
+                <li>Write a function named rect_circle_overlap that takes a Circle and a Rectangle and returns True if any of the corners of the Rectangle fall inside the circle. Or as a more challenging version, return True if any part of the Rectangle falls inside the circle.</li>
+            </ul>
+            <pre><code class="python">import math
+import copy
+
+class Point:
+    """Represents a point in 2-D space."""
+
+    def __init__(self, x = 0, y = 0) -> None:
+        """Constructor for a point object"""
+        self.x = x
+        self.y = y
+
+    def __str__(self) -> str:
+        """Return the x and y coordinates for a point"""
+        return '(%g, %g)' % (self.x, self.y)
+
+class Rectangle:
+    """
+    Represents a rectangle.
+    attributes: width: int, height: int, corner: Point.
+    """
+    height = None
+    width = None
+    corner = None
+
+class Circle:
+    """
+    Represents a circle.
+    attributes: center: Point, radius: float
+    """
+    center = None
+    radius = None
+
+def distance_between_points(p1: Point, p2: Point) -> int:
+    """Calculate the distance between 2 points"""
+    dx = p1.x - p2.x
+    dy = p1.y - p2.y
+    dist = math.sqrt(dx ** 2 + dy ** 2)
+    return dist
+
+def point_in_circle(point: Point, circle: Circle) -> bool:
+    """Check if a point is in the circle"""
+    d = distance_between_points(point, circle.center)
+    return d <= circle.radius
+
+def rect_in_circle(rect: Rectangle, circle: Circle) -> bool:
+    """Check if the rectangle is in the circle"""
+    p = copy.copy(rect.corner)
+    if not point_in_circle(p, circle):
+        return False
+    p.x += rect.width
+    if not point_in_circle(p, circle):
+        return False
+    p.y -= rect.height
+    if not point_in_circle(p, circle):
+        return False
+    p.x -= rect.width
+    if not point_in_circle(p, circle):
+        return False
+    return True
+
+def rect_circle_overlap(rect: Rectangle, circle: Circle) -> bool:
+    """Check if the rectangle overlaps the circle"""
+    p = copy.copy(rect.corner)
+    if point_in_circle(p, circle):
+        return True
+    p.x += rect.width
+    if point_in_circle(p, circle):
+        return True
+    p.y -= rect.height
+    if point_in_circle(p, circle):
+        return True
+    p.x -= rect.width
+    if point_in_circle(p, circle):
+        return True
+    return False
+
+&gt;&gt;&gt; box = Rectangle()
+&gt;&gt;&gt; box.width = 100.0
+&gt;&gt;&gt; box.height = 200.0
+&gt;&gt;&gt; box.corner = Point()
+&gt;&gt;&gt; box.corner.x = 50.0
+&gt;&gt;&gt; box.corner.y = 50.0
+&gt;&gt;&gt; circle = Circle()
+&gt;&gt;&gt; circle.center = Point()
+&gt;&gt;&gt; circle.center.x = 150.0
+&gt;&gt;&gt; circle.center.y = 100.0
+&gt;&gt;&gt;circle.radius = 75.0
+&gt;&gt;&gt; print(point_in_circle(box.corner, circle))
+False
+&gt;&gt;&gt; print(rect_in_circle(box, circle))
+False
+&gt;&gt;&gt; print(rect_circle_overlap(box, circle))
+True</code></pre>
+        </div>
+        <div id="exercise-15.2">
+            <h3>Exercise 15.2</h3>
+            <ul style="list-style-type:circle;">
+                <li>Write the draw_rect function that takes the turtle object and rectangle as arguments and uses the turtle to draw the rectangle.</li>
+                <li>Write the draw_circle that takes the turtle object and circle object as arguments and draws the Circle.</li>
+            </ul>
+            <pre><code class="python">def draw_circle(t, circle):
+    """Draw the circle"""
+    t.color("black") # Set colour
+    t.hideturtle() # Hide turtle
+    t.pu() # Lift pen
+    t.goto(circle.center.x, circle.center.x - circle.radius)  # Position pen
+    t.pd()  # Place pen to draw
+    t.circle(circle.radius)  # Draw the circle
+    t.pu()  # Lift pen
+
+def draw_rect(t, rect):
+    """Draw the rectangle"""
+    t.color("black") # Set colour
+    t.hideturtle() # Hide turtle
+    t.pu() # Lift pen
+    t.goto(rect.corner.x, rect.corner.y)
+    t.setheading(0)
+    t.pd() # Place pen
+    # Draw Rectangle
+    for length in rect.width, rect.height, rect.width, rect.height:
+        t.fd(length)
+        t.rt(90)</code></pre>
+        </div>
+        <div id="classes-and-objects-tutorial-lab-1">
+            <h3>Tutorial Lab 1: Creating a Class</h3>
+            <p>Create a person class with attributes for the person's first name, last name, weight and height.</p>
+            <pre><code class="python">class Person:
+    """Represents a generic Person."""
+    def __init__(self, first: str, last: str, weight: int, height: int) -> None:
+        """Constructor for a person"""
+        self.first_name = first
+        self.last_name = last
+        self.weight_in_lbs = weight
+        self.height_in_inches = height</code></pre>
+        </div>
+        <div id="classes-and-objects-tutorial-lab-2">
+            <h3>Tutorial Lab 2: Instantiate a Class</h3>
+            <p>Create a person object and display their attributes.</p>
+            <pre><code class="python">&gt;&gt;&gt; p = Person('Tom', 'Thumb', 150, 78)
+&gt;&gt;&gt; print(p.first_name + ' ' + p.last_name + ' weighs ' + str(p.weight_in_lbs) + 'lbs.')
+Tom Thumb weighs 150lbs.</code></pre>
+        </div>
+        <div id="classes-and-objects-tutorial-lab-3">
+            <h3>Tutorial Lab 3: Modify Instance Data Members</h3>
+            <p>Update a persons attributes</p>
+            <pre><code class="python">&gt;&gt;&gt; p.first_name = 'George'
+&gt;&gt;&gt; print(p.first_name + ' ' + p.last_name + ' weighs ' + str(p.weight_in_lbs) + 'lbs.')
+George Thumb weighs 150lbs</code></pre>
+        </div>
+        <div id="classes-and-objects-challenge">
+            <h3>Challenge</h3>
+            <p>Create five people objects and store them in a list. Iterate over the people list printing the first name of each of the people objects you created.</p>
+            <pre><code class="python">&gt;&gt;&gt; people = [Person("Johnny", "Depp", "80KG", "5ft 8"), Person("Leonardo", "DiCaprio", "100KG", "6ft"), Person("Will", "Smith", "75KG", "5ft 10"), Person("Taylor", "Swift", "50KG", "5ft"), Person("Angelina", "Jolie", "60KG", "5ft 2")]
+&gt;&gt;&gt; for person in people:
+        print(person.first_name)
+
+Johnny
+Leonardo
+Will
+Taylor
+Angelina</code></pre>
+        </div>
+        <div id="classes-and-objects-self-check-questions">
+            <h3>Self-Check Questions</h3>
+            <p>Assume you have a user-defined class called Automobile. What is the correct code syntax to create a new instance of this class in code?</p>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    truck = new Automobile
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" checked disabled readonly/>
+                    truck = Automobile()
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    truck = new Automobile()
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    truck = Automobile
+                </label>
+            </div>
+            <p>Assume you have instantiated an Automobile object called truck. The class definition for Automobile provided some attributes, such as make, model, color, etc. How do you set the make of your truck to Ford?</p>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    truck[make] = ‘Ford’
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    truck[0] = ‘Ford’
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly/>
+                    truck.make(‘Ford’)
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" checked disabled readonly/>
+                    truck.make = ‘Ford’
+                </label>
+            </div>
+            <p>True or false, objects are immutable?</p>
+            <div>
+                <label>
+                    <input type="checkbox" disabled readonly>
+                    True
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" checked disabled readonly/>
+                    False
+                </label>
+            </div>
+        </div>
+    </div>
+    <div id="collaborative-discussion-one">
+        <h2>Collaborative Discussion 1</h2>
+        <h3>Factors which influence reusability</h3>
+        <p>Refer to the article by Padhy et al. (2018), specifically Table 1, where the authors present a list of factors which they consider influence the reusability of a piece of object-oriented software. </p>
+        <p>In this collaborative discussion, you are required to prioritise this list, presenting your argument for the priorities assigned.</p>
+        <div class="collaborative-discussion-one-initial-post">
+            <h3>Initial Post</h3>
+            <p>Project planning is arguably the most important stage in any project as it helps to ensure that a project is completed in budget and on time, and it can have a huge impact on the success of a project. For example, by creating a simple class diagram you can spot places where you can reuse code throughout your code base. I considered data gathered from previous projects an important factor as it can be used to ensure you don’t run into similar problems encountered during previous projects. I put testing code very high on my list, as if code is tested properly, you can reuse it or modify it without breaking the code base. If you've reused code and have tested it you could be reusing buggy code. I put documentation low down on my list as while knowing what a function does is helpful, especially when refactoring code project documentation can only be reused in certain scenarios and doesn't offer that much value if your code is clean.</p>
+            <h4>References</h4>
+            <p>Padhy, N., Satapathy, S. and Singh, R., (2018). State-of-the-Art Object-Oriented Metrics and Its Reusability: A Decade Review. ResearchGate, [Online]. 431-441. Available at: https://www.researchgate.net/publication/321975902.</p>
+        </div>
+    </div>
+    <div id="unit-1-e-portfolio-activities">
+        <h2>E-Portfolio Activities</h2>
+        <p>Review the article by Di Silvestro & Nadir (2021) and discuss one aspect of this article which you find unexpected.</p>
+        <p>One thing in the article that surprised me is that there is a lack of published studies about the uses of e-portfolios in educational journals. The reason I found this particularly surprising is given the increased important of having a e-portfolio combined with the obvious benefits of having an eportfolio I would have thought there would have been more research into e-portfolios. For example, comparing how students with a e-portfolios preform at university compared to a student without one and the impact this can have on your employability. I belive that the main reason people don't have an e-portfolio is because they don't know of its value. Because of this I believe educating people on the benefits of having an eportfolio could be beneficial to anyone not just students. </p>
+        <h3>References</h3>
+        <p>Di Silvestro, R., & Nadir, N. (2021). The Power of ePortfolio Development to Foster Reflective and Deeper Learning in an Online Graduate Adult Education Program. Journal of Online Learning and Teaching, 17(1), 1–14. https://doi.org/10.24059/olj.v17i1.1491</p>
+        <p>Develop a Python program and apply protected and unprotected variables within it.</p>
+        <pre><code class="python">class Person:
+    """
+    Represents a person
+    attributes: name, age
+    """
+    def __init__(self, name, age):
+        # Private attribute
+        self._name = name
+        # Public attribute
+        self.age = surname
+
+    def get_name(self):
+        """Return a persons name"""
+        return self._name
+
+
+&gt;&gt;&gt; person = Person("Homer Simpson", 50)
+&gt;&gt;&gt; print(person.get_name()) # Accessing a private attribute with a public method
+Homer Simpson
+&gt;&gt;&gt; print(person.age) # Accessing a public attribute with the dot notation
+50</code></pre>
+    </div>
+</div>
+<div class = "navigation">
+    <div style='float: left;'><a href="OOP.html" class="previous round">&#8249;</a></div>
+    <div style='float: right;'><a href="unit-2.html" class="next round">&#8250;</a></div>
+</div>
+</body>
+</html>

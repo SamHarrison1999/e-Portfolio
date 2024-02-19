@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 7: Debugging / Error Handling, Data Structures and Data Search</title>
+      <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="unit-7">
+      <h1>Unit 7: Debugging / Error Handling, Data Structures and Data Search</h1>
+      <h2>Contents</h2>
+      <ul style="list-style-type:circle;">
+          <li><a href="#unit-7-objectives">Unit 7 Objectives</a></li>
+          <li><a href="#unit-7-reflection">Unit 7 Reflection</a></li>
+          <li><a href="#unit-7-e-portfolio-activities">E-Portfolio Activities</a></li>
+        </ul>
+      <div id="unit-7-objectives">
+      <h2>What we did in unit 7</h2>
+      <p>In this unit, we covered how to debug code and error handling in Python. We then looked in depth at the different data structures in Python.</p>
+    </div>
+    <div id="unit-7-reflection">
+      <h2>Reflection on unit 7</h2>
+      <p>Knowing how to handle errors in Python allowed me to develop high-quality code for my system implementation assignment. I had already had working knowledge on how to use a debugger to debug code from my time at Nomura as a software engineer, but going over it in more detail made me a better programmer as I learned there are multiple different ways to debug code, not just using the debugger and adding break points. I already knew how to handle errors in Java and since you handle them in a similar way in Python I already knew alot of the information we covered in this module but it was interesting to see how the error handling differs from Java to Python (Python uses try and except whereas Java uses try catch statements.) As I have completed several online courses via pluralsight on data structures and algorithms alot of the theory around data structures I already knew so this was mainly just refreshing my knowledge. It was intresting to see how data structures in Python compare to data structures in Java as while there are a lot of similarities, there are some key differences. I found it to be beneficial learning about the time and space complexity of different data structures in Python because it allowed me to improve the performance of the code for my assignment.</p>
+    </div>
+    <div id="unit-7-e-portfolio-activities">
+        <h2>E-portfolio activities</h2>
+        <p>Discuss the ways in which data structures support object-oriented development. Use examples of three different data structures to contextualise your response.</p>
+        <p>In object-oriented programming, you use classes to represent real world objects. Each class has a set of methods and attributes attached to it. Instances of objects can be stored in data structures, for example, a list of people. Data structures can also be attributes of a class, for example, a person class may use a dictionary to store their height and weight. A dictionary is used to store key value pairs so they can be indexed in a persons class, for example, measurements would be the dictionary then inside the dictionary there would be a key for height, waist size etc. A tuple can be used in a similar way to a list with the main difference being that it is immutable.</p>
+        <p>Create a nested dictionary of data on cars within a Car class. Extend the program to work with the dictionary by calling the following methods: items(), keys() and values()</p>
+        <pre><code class="python">def print_nested_dictionary_keys_and_values(dictionary):
+    for key, value in dictionary.items():
+        if isinstance(value, dict):
+            print_nested_dictionary_keys_and_values(value)
+        else:
+            print(f'{key} : {value}')
+
+
+def nested_dictionary_values(dictionary):
+    for values in dictionary.values():
+        if isinstance(values, dict):
+            yield from nested_dictionary_values(values)
+        else:
+            yield values
+
+
+def nested_dictionary_values_keys(dictionary, keys=None):
+    keys = keys or []
+    if isinstance(dictionary, dict):
+        keys += dictionary.keys()
+        [get_keys(x, keys) for x in dictionary.values()]
+    elif isinstance(dictionary, list):
+        [get_keys(x, keys) for x in dictionary]
+    return list(set(keys))
+
+
+vehicles = {
+    "car1": {
+        "make": "Telsa",
+        "model": "Model 3",
+        "year": 2024,
+        "engine": {
+            "transmission": "Automatic",
+            "horse power": 250
+        }
+    },
+    "car2": {
+        "make": "Ford",
+        "model": "GT",
+        "year": 2024,
+        "engine": {
+            "transmission": "Manual",
+            "horse power": 400
+        }
+    },
+    "car3": {
+        "make": "Toyota",
+        "model": "Yaris",
+        "year": 2024,
+        "engine": {
+            "transmission": "Hybrid",
+            "horse power": 150
+        }
+    }
+}
+
+
+&gt;&gt;&gt; print_nested_dictionary_keys_and_values(vehicles)
+make : Telsa
+model : Model 3
+year : 2024
+transmission : Automatic
+horse power : 250
+make : Ford
+model : GT
+year : 2024
+transmission : Manual
+horse power : 400
+make : Toyota
+model : Yaris
+year : 2024
+transmission : Hybrid
+horse power : 150
+&gt;&gt;&gt; print(list(nested_dictionary_values(vehicles)))
+['Telsa', 'Model 3', 2024, 'Automatic', 250, 'Ford', 'GT', 2024, 'Manual', 400, 'Toyota', 'Yaris', 2024, 'Hybrid', 150]
+&gt;&gt;&gt; print(nested_dictionary_values_keys(vehicles))
+['transmission', 'car2', 'model', 'car1', 'engine', 'make', 'car3', 'horse power', 'year']</code></pre>
+    </div>
+  </div>
+<div class = "navigation">
+    <div style='float: left;'><a href="unit-6.html" class="previous round">&#8249;</a></div>
+    <div style='float: right;'><a href="unit-8.html" class="next round">&#8250;</a></div>
+</div>
+</body>
+</html>
