@@ -1,0 +1,17 @@
+What is inheritance?
+
+The ability to define a new class that is a modified version of an existing class
+
+Assume you have a class called Automobile and you want to create another class, called Truck, that inherits from Automobile. Select the correct syntax below.
+
+class Automobile(Truck):
+“""Represents a Truck.""”
+
+Assume we want to track how many automobile objects are created, regardless of the type. How can we accomplish this?
+
+
+Create a class attribute in the Automobile class, outside of any method, to represent a class, or static variable
+
+What does the “Is-A” relationship refer to?
+
+The relationship between a child class and its parent class

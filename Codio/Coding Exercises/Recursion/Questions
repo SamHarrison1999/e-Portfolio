@@ -1,0 +1,25 @@
+Under what circumstances does it make sense to use recursion?
+
+Recursion works best when the solution is self-similar
+
+What is the purpose of the base case in recursion?
+
+When true, the base case stops the recursive calls and returns a value.
+
+Assume you want to write a recursive function that multiplies each element in a list by the number 5. What should the base case be?
+
+When the length of the list is 1
+
+Look at the code below. Select the answer that best describes why the code is problematic.
+
+def recursive_function(num):
+    if num < 0:
+        return 1
+    else:
+        return num + recursive_function(num)
+
+When using recursion, num should get smaller so that the base case becomes true
+
+What is the relationship between the draw_triangle function and the sierpinski function?
+
+draw_triangle is a helper function for sierpinski

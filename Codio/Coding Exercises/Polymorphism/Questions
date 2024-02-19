@@ -1,0 +1,107 @@
+Why is method overriding an example of polymorphism?
+
+Method overriding has a single interface (the method name) and works with different types (the parent and child classes).
+
+What is the output of the following code?
+
+class ExampleClass:
+    def total_chars(self, s1 = None, s2 = None, s3 = None):
+        if s1 is None and s2 is None and s3 is None:
+            return len(s1) + len(s2) + len(s3)
+        elif s1 is None and s2 is None:
+            return len(s1) + len(s2)
+        elif s1 is None:
+            return len(s1)
+        else:
+            return 0
+
+obj = ExampleClass()
+print(obj.total_chars('hello', 'world'))
+
+0
+
+Use the code blocks below to overload the subtraction operator so that the amount attributes are subtracted from one another
+
+def __sub__(self, other):
+  self.amount - other.amount
+
+What is wrong with the following code?
+
+class Alpha:
+  def __init__(self, value):
+    self.value = value
+
+  def __gt__(self, other):
+    return self.value > other.value
+
+class Bravo(Alpha):
+  pass
+
+class Charlie(Alpha):
+  pass
+
+example1 = Bravo(10)
+example2 = Charlie(7)
+
+print(example1 >= example2)
+
+The comparison operator in the print statement is wrong. It should be >.
+
+Duck typing is when the suitability of an object is determined by what it is, not by what it does.
+
+False
+
+Mark all of the ways in which polymorphism can be implemented.
+
+Method overriding
+
+Duck typing
+
+Method overloading
+
+Operator overloading
+
+Create a method that overloads the not equal operator. Drag the appropriate code blocks to the box below
+
+def __ne__(self, other):
+  return self.value != other.value
+
+def my_method(self, a = None, b = None, c = None):
+    # rest of the method goes here
+
+The code sample above is representative of which form of polymorphism?
+
+Method overloading
+
+Drag the correct blocks into the box below such that the + operator is overloaded
+
+def __add__(self, other):
+  return self.value + other.value
+
+Fill in the blanks below with the appropriate definition for each term.
+
+When a child class has a method with the same name as the parent class, but the child class performs a different task. -
+Method Overriding
+
+When a method performs different tasks depending on its parameters -
+Method Overloading
+
+When operators have different functions depending on their arguments -
+Operator Overloading
+
+When you check for the presence of a method or attribute instead of type -
+Duck Typing
+
+Look at the code below.
+
+def product(self, a = None, b = None, c = None):
+  if a is not None and b is not None and c is not None:
+    return a + b + c
+  elif a is not None and b is not None:
+    return a + b
+  elif a is not None:
+    return a
+  else:
+    return 0
+
+Method Overloading

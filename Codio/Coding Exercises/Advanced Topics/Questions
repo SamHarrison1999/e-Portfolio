@@ -1,0 +1,118 @@
+Select all of the ways you should import a module.
+
+import my_module
+from my_module import MyClass
+
+Assume the existence of the class MyClass. Drag the appropriate blocks into the box below so you create a list of ten objects of type MyClass
+
+my_list = []
+for i in range(10):
+  my_list.append(MyClass())
+
+Fill in the blanks below with the words from the dropdown menu.
+
+Inheritance
+ should be used to add functionality if there is a “is a” relationship.
+
+Composition
+ should be used to add functionality if there is a “has a” relationship.
+
+ Select the answer that best describes when you should use the __str__ and __repr__ methods.
+
+ Use the __str__ method for a human readable string. Use the __repr__ method for a precise explanation for other developers.
+
+ Use the Python snippet below to help you answer the following question.
+
+import enemy
+What can we infer from the import statement above?
+There is a Python module named enemy
+
+Assume the following code:
+
+class VideoGame:
+    def __init__(self, player):
+        self.player = player
+        self.level = 1
+        self.score = 0
+
+class Player:
+    def __init__(self):
+        self.health = 100
+        self.inventory = []
+
+my_game = VideoGame(player)
+
+Why does the above code generate an error message?
+
+
+There needs to be an instance of the Player class defined as player = Player().
+
+What can be inferred from the import statement below?
+
+from random import randint
+
+There is a module named random
+There is a function/class called randint
+
+Assume you have the list cats which is populated with instances of the Cat class. You want to invoke the meow method on the first element in the list. Select the Python code that would do this.
+
+cats[0].meow()
+
+Assume the following code:
+
+class Shape:
+    def __init__(self, name, sides, length, color):
+        self.name = name
+        self.sides = sides
+        self.length = length
+        self.color = color
+
+class Animation:
+    def __init__(self, x_position, y_position, delta_x, delta_y, image):
+        self.x_position = x_position
+        self.y_position = y_position
+        self.delta_x = delta_x
+        self.delta_y = delta_y
+        self.image = image
+
+my_shape = Shape('square', 4, 50, 'red')
+my_animation = Animation(0, 0, 20, 15, my_shape)
+Fill in the blanks below.
+
+The
+Animation
+ class is the composite class.
+
+The
+Shape
+ class is the component class.
+
+ Assume the following code:
+
+import node
+You want declare the variable my_node so that it is an instance of the Node class. Which line of code would accomplish this? Note, there are no parameters for the constructor.
+
+my_node = node.Node()
+
+Assume the following code:
+
+class ExampleClass:
+    def __str__(self):
+        return 'Example class used for assessment purposes'
+
+    def __repr__(self):
+        return 'ExampleClass()'
+
+my_example = ExampleClass()
+Which of the following Python commands will return Example class used for assessment purposes? Hint, there is more than one correct answer.
+
+str(my_example)
+print(my_example)
+
+Object is a user-defined class. Assume the following code:
+
+my_obj = Object()
+Which import statement is correct?
+
+from object import Object
+

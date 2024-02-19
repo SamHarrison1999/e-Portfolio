@@ -1,0 +1,11 @@
+Assume you have a user-defined class called Automobile. What is the correct code syntax to create a new instance of this class in code?
+
+truck = Automobile()
+
+Assume you have instantiated an Automobile object called truck. The class definition for Automobile provided some attributes, such as make, model, color, etc. How do you set the make of your truck to Ford?
+
+truck.make = ‘Ford’
+
+True or false, objects are immutable.
+
+False

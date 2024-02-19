@@ -1,0 +1,202 @@
+Select the best definition of encapsulation from the choices below.
+
+
+Encapsulation occurs when you group together related data and methods, and when you hide or restrict access to data.
+
+Assume the following code:
+
+class ExampleClass:
+    def __init__(self, attr1, attr2):
+        self.attr1 = attr1
+        self._attr2 = attr2
+
+Select all of the true statements about the instance variables attr1 and _attr2.
+
+_attr2 is assumed to be a private instance variable.
+
+Both attr1 and _attr2 are public instance variables.
+
+
+Assume the following code:
+
+class TestClass:
+  def __init__(self):
+    self._attr = 1
+    self.attr = 2
+    self.__attr = 3
+
+  def helper(self):
+    return self.__attr
+
+my_test = TestClass()
+
+Which command will print 3?
+
+print(my_test.helper())
+
+Use the terms Public and Private to fill in the blanks below.
+
+Private means that an attribute or method can be accessed only from within the class.
+
+Public means that an attribute or method can be accessed from within the class or outside of the class.
+
+Select all of the code snippets that have “private” attributes.
+
+class TestClass:
+  def __init__(self):
+    self.__attr = "I am an attribute"
+
+class TestClass:
+  def __init__(self):
+    self._attr = "I am an attribute"
+
+Look at the code snippets below and select all of the classes that have a getter method.
+
+class Dog:
+  def __init__(self, breed):
+    self._breed = breed
+
+  def get_breed(self):
+    return self._breed
+
+class Guitar:
+  def __init__(self, brand):
+    self._brand = brand
+
+  def retrieve_brand(self):
+    return self._brand
+
+What is a getter method?
+
+
+A getter method is a method that accesses (gets) the value of an instance variable.
+
+Assume the following code:
+
+class TestClass:
+  def __init__(self):
+    self._private = "I am private"
+
+  @property
+  def private(self):
+    return self._private
+
+Which code snippet below would be the setter for TestClass?
+
+@private.setter
+def private(self, new_value):
+  self._private = new_value
+
+Assume the following code:
+
+class TestClass:
+  def __init__(self):
+    self._color = "red"
+
+  def get_color(self):
+    return self._color
+
+  def set_color(self, new_color):
+    self._color = new_color
+
+  color = property(set_color, get_color)
+
+The order of the getter and setter in color = property(set_color, get_color) are reversed.
+
+Fill in the blanks below.
+
+A getter accesses the value of a private instance variable.
+
+A setter mutates the value of a private instance variable.
+
+Assume the class PrimaryColors as defined below:
+
+class PrimaryColor:
+  """Primary colors are red, blue, and yellow"""
+  def __init__(self):
+    self._color = "red"
+
+  @property
+  def color(self):
+    """Getter that returns the _color instance variable"""
+    return self._color
+
+  @color.setter
+  def color(self, new_color):
+    primary_colors = ["red", "blue", "yellow"]
+    if new_color not in primary_colors:
+        raise ValueError("New color must be a primary color")
+    self._color = new_color
+
+Fill in the blanks with the attr, _attr, and __attr.
+
+__attr acts like a private attribute because it cannot be easily accessed outside of the class. This naming scheme is used for name mangling.
+
+attr is a public attribute that can be accessed both inside and outside of the class.
+
+_attr is a convention by which Python programmers assume the attribute is private.
+
+Predict the output of the following code:
+
+class TestClass:
+  def __init__(self, color):
+    self._color = color
+
+my_object = TestClass("red")
+my_object.color = "blue"
+print(my_object.color)
+
+blue
+
+Look at Code A and Code B and then select all of the choices that are true.
+
+Code A:
+class Person:
+  def __init__(self, name):
+    self._name = name
+
+  @property
+  def name(self):
+    return self._name
+
+  @name.setter
+  def name(self, new_name):
+    self._name = new_name
+
+Code B:
+class Person:
+  def __init__(self, name):
+    self._name = name
+
+  def get_name(self):
+    return self._name
+
+  def set_name(self, new_name):
+    self._name = new_name
+
+  name = property(get_name, set_name)
+
+Code A uses the property decorator.
+Code B uses the property function.
+Both Code A and Code B do exactly the same thing.
+
+What is the output of the code below?
+
+class Person:
+  def __init__(self, name):
+    self._name = name
+
+  def get_name(self):
+    return self._name
+
+  def set_name(self, new_name):
+    self._name = new_name
+
+  name = property(set_name, get_name)
+
+my_person = Person("Marie")
+print(my_person.name)
+
+Error message - the getter should come before the setter in the property function
+
+
